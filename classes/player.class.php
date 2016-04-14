@@ -1,4 +1,5 @@
 <?php
+
 class Player {
 	public $name;
 	public $id;
@@ -8,8 +9,10 @@ class Player {
 	public $cardDraw;
 	
 	function __construct($name) {
+		global $GameFunction;
 		$this->name = $name;
-		
+		$GameFunction->playerCount($name);
+		$this->id = $GameFunction->players();
 	}
 
 	function getId() {
@@ -31,6 +34,9 @@ class Player {
 }
 
 $player1 = new Player("Thomas");
+$player2 = new Player("efkhwehrkf");
+
+echo $player2->getId();
 $player1->drawcard();
 $player1->drawcard();
 $player1->drawcard();
