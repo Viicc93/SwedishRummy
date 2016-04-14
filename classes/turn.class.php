@@ -7,7 +7,7 @@ class GameFunctions {
 	}
 
 	function players(){
-		return count($playerCount);
+		return count($this->playerCount);
 	}
 }
 

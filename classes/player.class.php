@@ -10,13 +10,19 @@ class Player {
 	
 	function __construct($name) {
 		global $GameFunction;
+		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
+		// $GameFunction skapades i turn.class.php
+		
 		$this->name = $name;
-		$GameFunction->playerCount($name);
+		$GameFunction->addPlayer($name);
+		// Lägger till Spelaren i GameFunction klassens array som håller reda på alla spelare.
+		
 		$this->id = $GameFunction->players();
+		// Ger spelare id beroende på array längend i GameFunction klassen.
 	}
 
 	function getId() {
-		return $this->id;
+		return $this->id . "\n" . $this->name . "\n";
 	}
 	
 	function drawCard() {
@@ -27,14 +33,14 @@ class Player {
 	
 	function cardCount() {
 		foreach ($this->cardsOnHand as &$cardOnHand) {
-			echo $cardOnHand;
+			echo $cardOnHand . "\n";
 		}
 	}
 	
 }
 
 $player1 = new Player("Thomas");
-$player2 = new Player("efkhwehrkf");
+$player2 = new Player("Victoria");
 
 echo $player2->getId();
 $player1->drawcard();
