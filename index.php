@@ -1,18 +1,18 @@
+<?php require_once 'config/config.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset = "utf-8"/>
-	<link rel="stylesheet" href="css/style.css">
-	<title>Swedish Rummy</title>
+  <meta charset="UTF-8">
+  <link href="#" type="text/css" rel="stylesheet" />
+  <title>Swedish Rummy</title>
 </head>
-
 <body>
-	<?php
 
-	spl_autoload_register( function($className)
-	{
-		include "classes/" . $className . ".class.php";
-	});
+
+<?php
+
+$card = new Card('aödsf', 123213, 'öalsdkfj');
+echo $card->cardId;
 
  ?>
 
@@ -50,5 +50,3 @@
 
 </body>
 </html>
-
-

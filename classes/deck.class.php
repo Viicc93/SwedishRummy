@@ -2,9 +2,4 @@
 class Deck {
 	public $cards;
 
-
-
 }
-
-
- ?>
