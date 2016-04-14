@@ -1,9 +1,14 @@
 <?php
   // require config file
   require_once 'config/config.php';
+
+  ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
   // drfine json file url
   //$json_file = 'json/cards.json';
-  define(PATH_TO_CARDS_JSON_FILE, 'json/cards.json');
+  //define(PATH_TO_CARDS_JSON_FILE, 'json/cards.json');
   // create an empty array to hold cards url:s
   $cardsMemory = [];
   $cardsObjMemory = [];
@@ -14,10 +19,10 @@
   $countCardsLength = 0;
   $cardId = 0;
   // check if cards.json exists
-  if (!file_exists(PATH_TO_CARDS_JSON_FILE, 'w+')) {
+  //if (!file_exists(PATH_TO_CARDS_JSON_FILE, 'w+')) {
     // create cards.json file
-    $fp = fopen(PATH_TO_CARDS_JSON_FILE, 'w+');
-    fclose($fp);
+    //$fp = fopen(PATH_TO_CARDS_JSON_FILE, 'w+');
+    //fclose($fp);
     // scan cards dir to get cards url
     $cardsArr = scandir('cards');
     // loop through cards url array
@@ -29,7 +34,8 @@
     array_push($cardsMemory, $item);
     //$card_expl = explode(array('.', '_'), $item);
     $split_img_url = preg_split('/[-_.]+/', $item);
-    $card_obj = $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $item));
+    $img_url = 'cards/' . $item;
+    $card_obj = $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
     //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($card_obj, JSON_FORCE_OBJECT));
 
     // echo "<pre>";
@@ -41,11 +47,21 @@
     // //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($card, JSON_FORCE_OBJECT));
     // }
   }
-};
-    echo "<pre>";
-    print_r($deck);
+//};
+//$deck->getCards();
+// echo '<pre>';
+
+// print_r($deck->getCards());
+
+$card_obj = $deck->getCards();
+
+
 
 ?>
+
+<?php for($i=0; $i < count($card_obj); $i++): ?>
+  <img src="<?php   echo $card_obj[$i]->getCardHref()?>" alt="">
+  <?php endfor; ?>
 <!DOCTYPE html>
 <html>
 <head>
