@@ -11,6 +11,11 @@
 
 <?php
 
+$json = file_get_contents('json/cards.json'); // get json file
+$cardObj = json_decode($json); // decode json
+
+
+
 $card = new Card('aödsf', 123213, 'öalsdkfj');
 echo $card->cardId;
 
