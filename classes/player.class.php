@@ -22,11 +22,11 @@ class Player {
 		array_push($this->cardsOnHand, $cardDraw);
 	}
 
-	function cardCount() {
-		foreach ($this->cardsOnHand as &$cardOnHand) {
-			echo $cardOnHand;
-		}
-	}
+	// function cardCount() {
+	// 	foreach ($this->cardsOnHand as &$cardOnHand) {
+	// 		echo $cardOnHand;
+	// 	}
+	// }
 
 }
 
