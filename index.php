@@ -59,9 +59,6 @@ $card_obj = $deck->getCards();
 
 ?>
 
-<?php for($i=0; $i < count($card_obj); $i++): ?>
-  <img src="<?php   echo $card_obj[$i]->getCardHref()?>" alt="">
-  <?php endfor; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,19 +67,6 @@ $card_obj = $deck->getCards();
   <title>Swedish Rummy</title>
 </head>
 <body>
-
-<?php
-
-$json = file_get_contents('json/cards.json'); // get json file
-$cardObj = json_decode($json); // decode json
-
-
-
-$card = new Card('aödsf', 123213, 'öalsdkfj');
-echo $card->cardId;
-
- ?>
-
 
 <header><h1>Swedish Rummy</h1></header>
 
