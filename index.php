@@ -1,6 +1,7 @@
 <?php
 // require config file
 require_once 'config/config.php';
+require_once 'inc/setup.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -13,7 +14,8 @@ error_reporting(E_ALL);
 $cardsMemory    = [];
 $cardsObjMemory = [];
 
-$deck = new Deck();
+$deck  = new Deck();
+$cards = $deck->getCards();
 
 $countCardsLength = 0;
 $cardId           = 0;
@@ -57,10 +59,6 @@ foreach ($cardsArr as $item) {
 $card_obj = $deck->getCards();
 
 ?>
-
-<?php for ($i = 0; $i < count($card_obj); $i++):?>
-  <img src="<?php echo $card_obj[$i]->getCardHref()?>" alt="">
-<?php endfor;?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +77,7 @@ $card_obj = $deck->getCards();
 <div id="table">
 
 <div class="row">
-	<div class="player player3">
+	<!-- <div class="player player3">
 		<div class="avatar"></div>
 			<div class="hand hand3">
 				<div class="c"></div>
@@ -92,12 +90,16 @@ $card_obj = $deck->getCards();
 				<div class="c"></div>
 				<div class="c"></div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 <div class="row middle-row">
+<form action="inc/setup.php" method="post">
+Name: <input type="text" name="User"><br>
+<input type="submit" name="submit">
+</form>
 
-	<div class="player player1">
+	<!-- <div class="player player1">
 	<div class="avatar"></div>
 		<div class="hand">
 			<div class="c"></div>
@@ -109,8 +111,8 @@ $card_obj = $deck->getCards();
 			<div class="c"></div>
 			<div class="c"></div>
 			<div class="c"></div>
-		</div>
-	</div>
+		</div> -->
+	<!-- </div>
 
 	<div id="cardBox">
 	<div id="deck"></div>
@@ -131,12 +133,12 @@ $card_obj = $deck->getCards();
 			<div class="c"></div>
 			<div class="c"></div>
 		</div>
-	</div>
+	</div> -->
 
 </div>
 
 <div class="row">
-	<div class="player player4">
+	<!-- <div class="player player4">
 		<div class="avatar"></div>
 			<div class="hand">
 				<div class="c"></div>
@@ -149,7 +151,7 @@ $card_obj = $deck->getCards();
 				<div class="c"></div>
 				<div class="c"></div>
 			</div>
-	</div>
+	</div> -->
 </div>
 
 </div>
