@@ -1,14 +1,45 @@
 <?php
 class Deck {
+  /**
+   * Card array
+   *
+   * @var array
+   */
 
-	public $cardDeck;
+	private $_cards;
 
-	function __construct($cardArray){
-		$this->cardDeck = [];
-		for ( $i=0; $i < count($cardArray); $i++) {
-			array_push($this->cardDeck, $card[$i]); // push card object to array to create a deck
-		}
+  /**
+   * The constructor define $_cards array.
+   *
+   *
+   */
 
-	}
+  public function __construct()
+  {
+    $this->_cards = [];
+  }
 
+  ########################################################################
+  # PUBLIC METHODS                                                       #
+  ########################################################################
+
+  /**
+   * Manipulate $_cards array with card object.
+   * This method uses composition to manipulate
+   * $_cards array with all card objects.
+   *
+   *  @param object  Card  A card object
+   */
+
+  public function setCards(Card $card)
+  {
+    // push card object to $_cards array
+    array_push($this->_cards, $card);
+  }
+
+
+  public function getCards()
+  {
+    return $this->_cards;
+  }
 }
