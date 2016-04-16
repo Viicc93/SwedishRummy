@@ -66,6 +66,7 @@ class Deck {
     for ($i=0; $i < count($this->_cards); $i++) {
       array_push($this->_cardsOnTable, $this->_cards[$i]);
     }
+    shuffle($this->_cardsOnTable);
     return $this->_cardsOnTable;
   }
 }

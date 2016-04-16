@@ -13,7 +13,7 @@ error_reporting(-1);
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <link href="css/all.css" type="text/css" rel="stylesheet" />
   <title>Swedish Rummy</title>
 </head>
 <body>
@@ -55,7 +55,7 @@ error_reporting(-1);
 
 foreach ($back_side as $key => $value):
 ?>
-<div style="z-index: <?php echo $key; ?>" class="cards_on_table"><img src="<?php echo $value->href ?>" alt=""></div>
+<div class="cards_on_table"><a data-id="<?php echo $value->getCardId(); ?>"><img style="z-index: <?php echo $key; ?>; right: <?php echo $key / 2; ?>px" src="<?php echo $value->href ?>" alt=""></a></div>
 <?php endforeach; ?>
 
 <!--	<div class="player player1">
