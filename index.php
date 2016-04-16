@@ -4,6 +4,9 @@
 require_once 'config/config.php';
 require_once 'inc/setup.php';
 
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+error_reporting(-1);
 
 ?>
 <!DOCTYPE html>
@@ -46,8 +49,16 @@ require_once 'inc/setup.php';
 		<input type="submit" name="submit">
 	</form>
 
+	 <?php
+	 // $deck->setCardsOnTableBackSideUrl('img/back_of_card.png');
+	 $back_side = $deck->getCardOnTable();
+
+foreach ($back_side as $key => $value):
+?>
+<div style="z-index: <?php echo $key; ?>" class="cards_on_table"><img src="<?php echo $value->href ?>" alt=""></div>
+<?php endforeach; ?>
+
 <!--	<div class="player player1">
->>>>>>> victoria
 	<div class="avatar"></div>
 		<div class="hand">
 			<div class="c"></div>

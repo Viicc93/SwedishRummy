@@ -10,6 +10,7 @@ class Deck {
   private $_cardsOnTable;
   private $_backOfCard;
   private $_users;
+  private $_card;
   /**
    * The constructor define $_cards array.
    *
@@ -21,7 +22,6 @@ class Deck {
     $this->_cards = [];
     $this->_cardsOnTable = [];
     $this->_users = [];
-
   }
 
   ########################################################################
@@ -38,6 +38,7 @@ class Deck {
 
   public function setCards(Card $card)
   {
+    $this->_card = $card;
     // push card object to $_cards array
     array_push($this->_cards, $card);
   }
@@ -52,12 +53,19 @@ class Deck {
     array_push($this->_users, $user, $bot);
   }
 
-  public function moveCardFromDeck($indexOfCard){
-    array_splice($this->_cards, $indexOfCard, 1);
+  public function moveCardFromDeck($cardIndex){
+    array_splice($this->_cards, $cardIndex, 1);
   }
 
   public function renderDeck($_backOfCard){
     return $this->_backOfCard = $_backOfCard;
   }
 
+  public function getCardOnTable()
+  {
+    for ($i=0; $i < count($this->_cards); $i++) {
+      array_push($this->_cardsOnTable, $this->_cards[$i]);
+    }
+    return $this->_cardsOnTable;
+  }
 }

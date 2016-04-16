@@ -15,6 +15,8 @@ class User extends Player {
 		# code to render cards on hand...
 	}
 
-}
+	public function getId() {
+		return $this->_playerId;
+	}
 
- ?>
+}

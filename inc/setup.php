@@ -48,37 +48,30 @@ try {
 
 // print_r($deck->getCards());
 
-$card_obj = $deck->getCards(); // get card array
 
 
-	if (isset($_POST['submit'])){ // if button submit is clicked
-		$userName = $_POST['user']; // get name of user player
+  if (isset($_POST['submit'])){ // if button submit is clicked
+    $userName = $_POST['user']; // get name of user player
 
-		$user = new User($userName); // create user player
-		$bot = new Bot(); // create bot player
-		$deck->addPlayers($user, $bot); // add players to Deck class
+    $user = new User($userName); // create user player
+    $bot = new Bot(); // create bot player
+    $deck->addPlayers($user, $bot); // add players to Deck class
 
-		for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
-			$randCard = rand(0, count($card_obj)-1); // count array and get a random index for card
-			$user->dealCard($card_obj[$randCard]); // send card to dealCard() and push to cardsOnHand array
-			array_splice($card_obj, $randCard, 1); // remove dealed card from deck
-		}
+    for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
+      $card_obj = $deck->getCards(); // get card array
+			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
+			$botCardIndex = mt_rand(0, count($card_obj));
 
-		for ($j=0; $j < 8; $j++) { // same as user player to deal cards for bot
-			$randCard = rand(0, count($card_obj)-1);
-			$bot->dealCard($card_obj[$randCard]);
-			array_splice($card_obj, $randCard, 1);
-		}
+      if ($userCardIndex != $botCardIndex) {
 
-		//echo "<pre>";
-		//print_r($card_obj);
-		//var_dump($user);
-		//var_dump($bot);
-    echo "<pre>";
-print_r($deck);
+            $user->dealCard($card_obj[$userCardIndex]); // send card to dealCard() and push to cardsOnHand array
+            $deck->moveCardFromDeck($userCardIndex); // remove dealed card from deck
 
+            $bot->dealCard($card_obj[$botCardIndex]);
+            $deck->moveCardFromDeck($bodCardIndex);
+      }
+    }
 	}
-
 } catch (Exception $e) {
 	echo $e;
 }
