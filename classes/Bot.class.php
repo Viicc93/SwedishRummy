@@ -1,8 +1,8 @@
 <?php
 class Bot extends Player {
 
-	function __construct($name){
-		Parent::__construct($name);
+	function __construct(){
+		Parent::__construct("Anna");
 	}
 
 	public function PlayCard(){
