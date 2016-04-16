@@ -6,8 +6,9 @@ class Deck {
    * @var array
    */
 
-	private $_cards;
-
+	public $_cards;
+  public $cardsOnTable;
+  public $backOfCard;
   /**
    * The constructor define $_cards array.
    *
@@ -17,6 +18,8 @@ class Deck {
   public function __construct()
   {
     $this->_cards = [];
+    $this->cardsOnTable = [];
+
   }
 
   ########################################################################
@@ -42,4 +45,18 @@ class Deck {
   {
     return $this->_cards;
   }
+
+  public function addPlayers(User $user, Bot $bot){
+
+
+  }
+
+  public function moveCardFromDeck($indexOfCard){
+    array_splice($this->_cards, $indexOfCard, 1);
+  }
+
+  public function renderDeck($backOfCard){
+    return $this->backOfCard = $backOfCard;
+  }
+
 }
