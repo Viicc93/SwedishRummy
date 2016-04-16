@@ -8,6 +8,7 @@ class Deck {
 
 	public $_cards;
   public $cardsOnTable;
+  public $backOfCard;
   /**
    * The constructor define $_cards array.
    *
@@ -52,6 +53,10 @@ class Deck {
 
   public function moveCardFromDeck($indexOfCard){
     array_splice($this->_cards, $indexOfCard, 1);
+  }
+
+  public function renderDeck($backOfCard){
+    return $this->backOfCard = $backOfCard;
   }
 
 }
