@@ -3,21 +3,12 @@
 class Player {
 	public $name;
 	public $id;
-<<<<<<< HEAD
-	// public $playerId;
-	public $cardsOnHand = [];
-=======
 	public $playerId;
 	public $cardsOnHand;
->>>>>>> victoria
 	public $playCard;
 	public $cardDraw;
 
 	function __construct($name) {
-<<<<<<< HEAD
-		$this->name = $name;
-
-=======
 		$this->cardsOnHand = [];
 	//	global $GameFunction;
 		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
@@ -29,22 +20,15 @@ class Player {
 
 	//	$this->id = $GameFunction->players();
 		// Ger spelare id beroende på array längend i GameFunction klassen.
->>>>>>> victoria
 	}
 
 	function getId() {
 		return $this->id . "\n" . $this->name . "\n";
 	}
 
-<<<<<<< HEAD
-	function dealCard() {
-		$cards    = ['hearts', 'diamonds', 'clubs', 'spades'];//Tillfäligt, drar kort från högen
-		$cardDraw = $cards[mt_rand(0, count($cards)-1)];
-=======
 	function dealCard($cardDraw) {
 	//	$cards = ['hearts', 'diamonds', 'clubs', 'spades']; //Tillfäligt, drar kort från högen
 	// $cardDraw = $cards[mt_rand(0, count($cards) - 1)];
->>>>>>> victoria
 		array_push($this->cardsOnHand, $cardDraw);
 	}
 
@@ -56,4 +40,4 @@ class Player {
 
 }
 
-?>
+ ?>

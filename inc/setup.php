@@ -74,7 +74,8 @@ $card_obj = $deck->getCards(); // get card array
 		//print_r($card_obj);
 		//var_dump($user);
 		//var_dump($bot);
-
+    echo "<pre>";
+print_r($deck);
 
 	}
 
