@@ -7,8 +7,8 @@ class Deck {
    */
 
 	private $_cards;
-  private $cardsOnTable;
-  private $backOfCard;
+  private $_cardsOnTable;
+  private $_backOfCard;
   private $_users;
   /**
    * The constructor define $_cards array.
@@ -19,7 +19,7 @@ class Deck {
   public function __construct()
   {
     $this->_cards = [];
-    $this->cardsOnTable = [];
+    $this->_cardsOnTable = [];
     $this->_users = [];
 
   }
@@ -56,8 +56,8 @@ class Deck {
     array_splice($this->_cards, $indexOfCard, 1);
   }
 
-  public function renderDeck($backOfCard){
-    return $this->backOfCard = $backOfCard;
+  public function renderDeck($_backOfCard){
+    return $this->_backOfCard = $_backOfCard;
   }
 
 }
