@@ -53,6 +53,11 @@ class Deck {
     array_push($this->_users, $user, $bot);
   }
 
+  public function getUser()
+  {
+    return $this->_users;
+  }
+
   public function moveCardFromDeck($cardIndex){
     array_splice($this->_cards, $cardIndex, 1);
   }
