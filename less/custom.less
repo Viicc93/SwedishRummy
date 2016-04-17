@@ -6,18 +6,15 @@
   border-radius: 15px;
   background: #408000;
 }
-
 .row {
   width: 30%;
-  height:600px;
+  height: 600px;
   float: left;
   display: inline-block;
 }
-
 .middle-row {
-  width:39%;
+  width: 39%;
 }
-
 .player {
   margin: 25px auto;
   width: 300px;
@@ -26,32 +23,32 @@
 .player3 {
   margin-top: 300px;
   margin-left: -100px;
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Safari */
+  -ms-transform: rotate(90deg);
+  /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  /* Safari */
   transform: rotate(90deg);
-
 }
-
 .player4 {
   margin-top: 150px;
-  -ms-transform: rotate(270deg); /* IE 9 */
-  -webkit-transform: rotate(270deg); /* Safari */
+  -ms-transform: rotate(270deg);
+  /* IE 9 */
+  -webkit-transform: rotate(270deg);
+  /* Safari */
   transform: rotate(270deg);
-
 }
 #cardBox {
   margin: 10px auto;
   width: 160px;
 }
-
-#deck{
+#deck {
   background: url(../cards/ace_of_diamonds.png) no-repeat;
   background-size: contain;
   width: 75px;
   height: 109px;
   float: left;
 }
-#playedCard{
+#playedCard {
   background: url(../cards/king_of_hearts.png) no-repeat;
   background-size: contain;
   float: right;
@@ -64,7 +61,6 @@
   height: 30px;
   border: 1px solid black;
 }
-
 .c {
   background: url(../cards/3_of_clubs.png) no-repeat;
   background-size: contain;
@@ -78,23 +74,14 @@
   height: 140px;
   margin-left: 50px;
 }
-
-
 /* ==========================================================================
    CARDS ON TABLE
    ========================================================================== */
-
-   .middle-row {
-    position: relative;
-
-      .cards_on_table {
-
-        img {
-          position: absolute;
-          width: 30%;
-          height: auto;
-        }
-      }
-   }
-
-
+.middle-row {
+  position: relative;
+}
+.middle-row .cards_on_table img {
+  position: absolute;
+  width: 30%;
+  height: auto;
+}

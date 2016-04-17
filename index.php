@@ -13,7 +13,7 @@ error_reporting(-1);
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="css/all.css" type="text/css" rel="stylesheet" />
+  <link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
   <title>Swedish Rummy</title>
 </head>
 <body>
@@ -24,9 +24,8 @@ error_reporting(-1);
 
 <div id="table">
 
-<div class="row">
-<!--	<div class="player player3">
->>>>>>> victoria
+<!-- <div class="row">
+	<div class="player player3">
 		<div class="avatar"></div>
 			<div class="hand hand3">
 				<div class="c"></div>
@@ -39,8 +38,8 @@ error_reporting(-1);
 				<div class="c"></div>
 				<div class="c"></div>
 			</div>
-		</div> -->
-	</div>
+		</div>
+	</div> -->
 
 
 <div class="row middle-row">
