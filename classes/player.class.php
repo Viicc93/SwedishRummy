@@ -40,7 +40,12 @@ class Player {
 	{
 		return $this->_cardsOnHand;
 	}
-
+	public function getCardId()
+	{
+		for ($i=0; $i < count($this->_cardsOnHand); $i++) {
+			return $this->_cardsOnHand[$i]->getCardId();
+		}
+	}
 }
 
  ?>

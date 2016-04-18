@@ -47,16 +47,24 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 											<?php
 											  //drfine json file url
 
-											  $botAndTableCards = ['bot' => $user->name, 'cards' => $user->getCardsArray(), 'cardsOnTable' => $deck->getCardOnTable()];
-											  array_push($allCards , $botAndTableCards);
+											  $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
+											  $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
+											  $allCards['visibleCardsOnTable'] = [];
 											  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
 
 											?>
 									</div><!-- end bot-data -->
+									<div class="bot-cards">
+										<?php  for ($i=0; $i < count($user->getCardsArray()); $i++): ?>
+											<div class="card-pos">
+
+											<a href="" data-id="<?php echo $user->getCardsArray()[$i]->getCardId(); ?>"><img src="<?php echo $user->getCardsArray()[$i]->getCardHref(); ?>" alt=""></a>
+											</div>
+										<?php endfor; ?>
+									</div><!-- end bot-cards -->
 								<?php else: ?>
-									<?php $userHuman = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
-									<?php array_push($allCards, $userHuman); ?>
-									<?php  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));?>
+									<?php $allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
+									<?php  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
 								<?php endif; ?>
 							<?php endforeach; ?>
 						<?php endif; ?>
