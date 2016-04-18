@@ -54,21 +54,32 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 
 											?>
 									</div><!-- end bot-data -->
-									<div class="bot-cards">
+									<div data-userId="<?php echo $user->getId(); ?>" class="cards-on-table-users bot-cards">
 										<?php  for ($i=0; $i < count($user->getCardsArray()); $i++): ?>
 											<div class="card-pos">
 
 											<a href="" data-id="<?php echo $user->getCardsArray()[$i]->getCardId(); ?>"><img src="<?php echo $user->getCardsArray()[$i]->getCardHref(); ?>" alt=""></a>
-											</div>
+											</div><!-- end card-pos -->
 										<?php endfor; ?>
 									</div><!-- end bot-cards -->
+						</div><!-- end bot-user -->
 								<?php else: ?>
+									<div data-userId="<?php echo $user->getId(); ?>" class="cards-on-table-users user-cards">
 									<?php $allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
 									<?php  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
+									<h3>User Cards</h3>
+
+										<?php  for ($i=0; $i < count($user->getCardsArray()); $i++): ?>
+											<div class="card-pos">
+
+											<a href="" data-id="<?php echo $user->getCardsArray()[$i]->getCardId(); ?>"><img src="<?php echo $user->getCardsArray()[$i]->getCardHref(); ?>" alt=""></a>
+											</div><!-- end card-pos -->
+										<?php endfor; ?>
+
+									</div><!-- end user-cards -->
 								<?php endif; ?>
 							<?php endforeach; ?>
 						<?php endif; ?>
-						</div><!-- end bot-user -->
 
 					<div class="middle-row col-md-4">
 

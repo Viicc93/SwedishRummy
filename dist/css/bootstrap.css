@@ -6807,15 +6807,15 @@ button.close {
   width: 30%;
   height: auto;
 }
-.bot-cards {
+.cards-on-table-users {
   position: relative;
   display: table;
   margin: 0 auto;
 }
-.bot-cards .card-pos {
+.cards-on-table-users .card-pos {
   display: table-cell;
 }
-.bot-cards .card-pos img {
+.cards-on-table-users .card-pos img {
   width: 80%;
   height: auto;
 }
