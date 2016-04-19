@@ -6732,10 +6732,27 @@ button.close {
   border-radius: 15px;
   background: #408000;
 }
+#table .messages {
+  text-align: center;
+  padding: .2rem;
+  color: #d9534f;
+  margin-top: 1rem;
+}
+#table .messages p {
+  border: 1px solid #d9534f;
+  background-color: rgba(0, 0, 0, 0.4);
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  padding: 1rem;
+}
+.user-form {
+  display: block;
+  margin-top: 1rem;
+}
 .user-form form {
   display: inline-block;
   margin: 0 auto;
-  padding: 0;
 }
 .player {
   margin: 25px auto;
@@ -6806,6 +6823,7 @@ button.close {
   position: absolute;
   width: 30%;
   height: auto;
+  padding: 0;
 }
 .cards-on-table-users {
   position: relative;
