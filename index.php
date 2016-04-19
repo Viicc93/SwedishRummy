@@ -30,12 +30,34 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 				<div id="wrap">
 					<div id="table">
 						<div class="col-md-12 user-form">
-							<form method="post">
-								<input type="text" name="user">
-								<input type="submit" name="submit">
-							</form>
+
+						<form method="POST" class="navbar-form navbar-left">
+						  <div class="form-group">
+						  <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
+						    <input type="text" name="user" class="form-control" placeholder="Username">
+						  </div>
+						  <button type="submit" name="submit" class="btn btn-default">Join</button>
+						</form>
+
 						</div><!-- end user-form -->
 						<div class="col-md-12 bot-user">
+						<!-- show messages -->
+						<div class="messages">
+							<!-- check if missing fields session has been started -->
+							<?php if(Session::getSession('missing')): ?>
+								<!-- assign missing array to $missing variable -->
+								<?php $missing = Session::flashSession('missing'); ?>
+								<!-- loop through $missing variable -->
+								<?php foreach($missing as $field): ?>
+									<?php switch ($field) {
+										case 'user':
+										?>
+										<p>OBS: You forget to cheese a User Name!</p>
+
+										<?php break;} ?>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</div><!-- end messages -->
 						<h2>Bot user</h2>
 						<?php if(filter_has_var(INPUT_POST, 'submit')): ?>
 							<?php $username =   $_POST['user'];?>
