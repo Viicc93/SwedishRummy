@@ -1,5 +1,8 @@
 <?php
 
+// Håller alla players som skapas i en array.
+$players = [];
+
 class Player {
 	public $name;
 	protected $_id;
@@ -8,9 +11,12 @@ class Player {
 	public $playCard;
 	public $cardDraw;
 
+	
 	function __construct($name) {
+		global $players;
 		$this->_cardsOnHand = [];
-		$this->_id = rand(1, 8);
+		array_push($players, $this->name);
+		$this->_id = count($players);
 		$this->_playerId = $this->_id;
 	//	global $GameFunction;
 		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
