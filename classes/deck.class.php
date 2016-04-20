@@ -25,7 +25,6 @@ class Deck {
     $this->_users = [];
     // add Bot player
     $this->addBotPlayer();
-
   }
 
   ########################################################################
@@ -64,7 +63,7 @@ class Deck {
    */
   public function addPlayers(User $user){
     // push user object to _users array
-    array_push($this->_users, $user, $bot);
+    array_push($this->_users, $user);
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
@@ -92,6 +91,13 @@ class Deck {
         array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
       }
     }
+  }
+
+  public function setUserId()
+  {
+    // for ($i=0; $i < count($this->_users); $i++) {
+    //   echo $this->_users->$_playerId;
+    // }
   }
 
   public function getUser()

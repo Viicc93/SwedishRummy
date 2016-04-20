@@ -36,6 +36,11 @@ class Player {
 		}
 	}
 
+	public function setUserId()
+	{
+
+	}
+
 	public function getCardsArray()
 	{
 		return $this->_cardsOnHand;

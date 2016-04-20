@@ -23,7 +23,7 @@ try {
     //$card_expl = explode(array('.', '_'), $item);
     $split_img_url = preg_split('/[-_.]+/', $item);
     $img_url = 'cards/' . $item;
-    $card_obj = $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
+    $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
   }
 
 
@@ -43,14 +43,21 @@ try {
            $missing  = $val->getMissing();
            // catch errors
            $errors   = $val->getErrors();
-
+           /*
+           * check that there is no missing field or errors
+           * that returned from Validator-class
+           */
            if (!$missing && !$errors) {
-              $username = $filtered['user'];
-                $user = new User($username); // create user player
-
-                $deck->addPlayers($user); // add players to Deck class
-
+            // get filtered username returned from Validator-class
+            $username = $filtered['user'];
+            $user = new User($username); // create user player
+            $deck->addPlayers($user); // add players to Deck class
       }
+      /*
+      * If user tries to join without username,
+      * will get a flash message tells that
+      * the username is required.
+      */
       if ($missing) {
         // Sets sessions to show the missing fields
         Session::flashSession('missing',$missing);
