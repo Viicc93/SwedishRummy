@@ -83,7 +83,6 @@ try {
     } catch (Exception $e) {
       echo $e;
     }
->>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 	}
 } catch (Exception $e) {
 	echo $e;
