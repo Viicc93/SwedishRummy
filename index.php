@@ -46,6 +46,8 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 										<p><?php echo $user->name ?></p>
 											<?php
 											  //drfine json file url
+               $deck->dealTest();         //
+               print_r($bot->getCardsArray());
 
 											  $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
 											  $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];

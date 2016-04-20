@@ -57,7 +57,7 @@ try {
     $bot = new Bot(); // create bot player
     $deck->addPlayers($user, $bot); // add players to Deck class
 
-    for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
+   /* for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
       $card_obj = $deck->getCards(); // get card array
 			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
 			$botCardIndex = mt_rand(0, count($card_obj));
@@ -70,7 +70,8 @@ try {
             $bot->dealCard($card_obj[$botCardIndex]);
             $deck->moveCardFromDeck($bodCardIndex);
       }
-    }
+
+    }*/
 	}
 } catch (Exception $e) {
 	echo $e;

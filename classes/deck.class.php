@@ -53,10 +53,20 @@ class Deck {
     array_push($this->_users, $user, $bot);
   }
 
+  public function dealTest(){
+    for ($i=0; $i < count($this->_users); $i++) {
+
+      echo "<pre>";
+      array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards) );
+
+    }
+  }
+
   public function getUser()
   {
     return $this->_users;
   }
+
 
   public function moveCardFromDeck($cardIndex){
     array_splice($this->_cards, $cardIndex, 1);
