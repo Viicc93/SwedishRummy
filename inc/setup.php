@@ -55,14 +55,13 @@ try {
       			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
       			$botCardIndex = mt_rand(0, count($card_obj));
 
-<<<<<<< HEAD
    /* for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
       $card_obj = $deck->getCards(); // get card array
 			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
 			$botCardIndex = mt_rand(0, count($card_obj));
-=======
+
           if ($userCardIndex != $botCardIndex) {
->>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
+
 
                 $user->dealCard($card_obj[$userCardIndex]); // send card to dealCard() and push to cardsOnHand array
                 $deck->moveCardFromDeck($userCardIndex); // remove dealed card from deck
@@ -78,11 +77,9 @@ try {
         // destroy missing session
         Session::destroySession();
 
-      }
-<<<<<<< HEAD
+
 
     }*/
-=======
     } catch (Exception $e) {
       echo $e;
     }
