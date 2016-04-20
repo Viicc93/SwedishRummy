@@ -24,11 +24,11 @@ class Player {
 		// Ger spelare id beroende på array längend i GameFunction klassen.
 	}
 
-	public function dealCard($cardObj) {
-	//	$cards = ['hearts', 'diamonds', 'clubs', 'spades']; //Tillfäligt, drar kort från högen
-	// $cardObj = $cards[mt_rand(0, count($cards) - 1)];
-		array_push($this->_cardsOnHand, $cardObj);
-	}
+	// public function dealCard($cardObj) {
+	// //	$cards = ['hearts', 'diamonds', 'clubs', 'spades']; //Tillfäligt, drar kort från högen
+	// // $cardObj = $cards[mt_rand(0, count($cards) - 1)];
+	// 	array_push($this->_cardsOnHand, $cardObj);
+	// }
 
 	public function cardCount() {
 		foreach ($this->_cardsOnHand as $cardOnHand) {

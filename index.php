@@ -19,6 +19,8 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 	<head>
 		<meta charset="UTF-8">
 		<link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 		<title>Swedish Rummy</title>
 	</head>
 <body>
@@ -68,6 +70,8 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 									<div class="bot-data">
 										<p><?php echo $user->name ?></p>
 											<?php
+
+
 
 											  // $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
 											  // $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
@@ -131,6 +135,4 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 	</body>
 </html>
 
-<?php echo '<pre>';
-print_r($deck->getUser()); ?>
 
