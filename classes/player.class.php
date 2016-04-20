@@ -4,7 +4,7 @@ class Player {
 	public $name;
 	protected $_id;
 	protected $_playerId;
-	protected $_cardsOnHand;
+	public $_cardsOnHand;
 	public $playCard;
 	public $cardDraw;
 

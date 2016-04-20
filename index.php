@@ -11,6 +11,7 @@ $allCards = [];
 
 $json_file = 'json/cards.json';
 define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
+define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 
 ?>
 <!DOCTYPE html>
@@ -67,12 +68,18 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 									<div class="bot-data">
 										<p><?php echo $user->name ?></p>
 											<?php
-											  //drfine json file url
 
-											  $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
-											  $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
-											  $allCards['visibleCardsOnTable'] = [];
-											  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
+											  // $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
+											  // $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
+											  // $allCards['visibleCardsOnTable'] = [];
+											  // file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
+											// file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, serialize($deck));
+											// $obj = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
+
+											// print_r(unserialize($obj));
+
+
+
 
 											?>
 									</div><!-- end bot-data -->
@@ -87,8 +94,8 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 						</div><!-- end bot-user -->
 								<?php else: ?>
 									<div data-userId="<?php echo $user->getId(); ?>" class="cards-on-table-users user-cards">
-									<?php $allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
-									<?php  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
+									<?php //$allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
+									<?php  //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
 									<h3>User Cards</h3>
 
 										<?php  for ($i=0; $i < count($user->getCardsArray()); $i++): ?>
