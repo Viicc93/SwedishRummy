@@ -54,7 +54,8 @@ try {
             $card_obj = $deck->getCards(); // get card array
       			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
       			$botCardIndex = mt_rand(0, count($card_obj));
-
+			}
+		  }
    /* for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
       $card_obj = $deck->getCards(); // get card array
 			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
@@ -83,7 +84,6 @@ try {
     } catch (Exception $e) {
       echo $e;
     }
->>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 	}
 } catch (Exception $e) {
 	echo $e;
