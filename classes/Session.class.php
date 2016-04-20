@@ -32,6 +32,38 @@ Class Session
 			}
 		}
 
+<<<<<<< HEAD
+=======
+	/**
+	 Delete Session description here
+	*/
+
+	 public static function deleteSession($name)
+	 {
+	 	if (self::getSession($name))
+	 	{
+	 		unset($_SESSION[$name]);
+	 	}
+	 }
+
+	/**
+		Description here
+	*/
+
+	public static function flashSession($name, $string = '')
+	{
+		if (self::getSession($name))
+		{
+			$session = self::getSession($name);
+			self::deleteSession($name);
+			return $session;
+		}else
+			{
+				self::setSession($name, $string);
+			}
+	}
+
+>>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 	 /**
 	 * Sets name and value to a session. It has to parameter $name and $value.
 	 * The first parameter for the session name, and the secon for the session value.
@@ -106,10 +138,19 @@ Class Session
 
 	public static function notIsset($name, $location)
 		{
+<<<<<<< HEAD
 			if(!isset($_SESSION[$name]))
 			{
 				header('Location: ' . $location);
 			}
+=======
+			if(!isset($_SESSION[$name])):
+			{
+				header('Location: ' . $location);
+				exit();
+			}
+			endif;
+>>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 		}
 }
 

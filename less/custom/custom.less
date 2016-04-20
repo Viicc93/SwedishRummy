@@ -5,6 +5,21 @@
   border: 3px dotted white;
   border-radius: 15px;
   background: #408000;
+
+  .messages {
+    text-align: center;
+    padding: .2rem;
+    color: @brand-danger;
+    margin-top: 1rem;
+    p {
+      border: 1px solid @brand-danger;
+      background-color: rgba(0, 0, 0, 0.4);
+      vertical-align: middle;
+      padding: 0;
+      margin: 0;
+      padding: 1rem;
+    }
+  }
 }
 // .row {
 //   width: 30%;
@@ -14,16 +29,15 @@
 // }
 
 .user-form {
+  display: block;
+  margin-top: 1rem;
   form {
     display: inline-block;
     margin: 0 auto;
-    padding: 0;
   }
 }
 
-.middle-row {
 
-}
 .player {
   margin: 25px auto;
   width: 300px;
@@ -93,7 +107,9 @@
   position: absolute;
   width: 30%;
   height: auto;
+  padding: 0;
 }
+
 
 .cards-on-table-users {
   position: relative;
