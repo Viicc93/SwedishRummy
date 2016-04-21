@@ -134,6 +134,3 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 		</div><!-- end container -->
 	</body>
 </html>
-
-
->>>>>>> mohamadSession
