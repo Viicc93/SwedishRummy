@@ -1,34 +1,34 @@
 <?php
 class Card {
-	protected $_cardId;
-	protected $_value;
-	protected $_suit;
-  protected $_href;
+	protected $cardId;
+	public $value;
+	public $suit;
+  public $href;
 
 	function __construct($cardId, $value, $suit, $href){
-		$this->_cardId = $cardId;
-		$this->_value = $value;
-		$this->_suit = $suit;
-    $this->_href = $href;
+		$this->cardId = $cardId;
+		$this->value = $value;
+		$this->suit = $suit;
+    $this->href = $href;
 	}
 
   public function getCardId()
   {
-    return $this->_cardId;
+    return $this->cardId;
   }
 
   public function getCardValue()
   {
-    return $this->_value;
+    return $this->value;
   }
 
   public function getCardSuit()
   {
-    return $this->_suit;
+    return $this->suit;
   }
 
   public function getCardHref()
   {
-    return $this->_href;
+    return $this->href;
   }
 }

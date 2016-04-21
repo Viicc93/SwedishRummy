@@ -1,25 +1,33 @@
 <?php
+
 class Player {
 	public $name;
-	public $id;
-	// public $playerId;
-	public $cardsOnHand = [];
+	protected $_id;
+	protected $_playerId;
+	public $_cardsOnHand;
 	public $playCard;
 	public $cardDraw;
 
 	function __construct($name) {
+		$this->_cardsOnHand = [];
+		$this->_id          = rand(1, 8);
+		$this->_playerId    = $this->_id;
+		//	global $GameFunction;
+		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
+		// $GameFunction skapades i turn.class.php
+
 		$this->name = $name;
+		//	$GameFunction->addPlayer($name);
+		// Lägger till Spelaren i GameFunction klassens array som håller reda på alla spelare.
 
+		//	$this->id = $GameFunction->players();
+		// Ger spelare id beroende på array längend i GameFunction klassen.
 	}
 
-	function getId() {
-		return $this->id;
-	}
-
-	function dealCard() {
-		$cards    = ['hearts', 'diamonds', 'clubs', 'spades'];//Tillfäligt, drar kort från högen
-		$cardDraw = $cards[mt_rand(0, count($cards)-1)];
-		array_push($this->cardsOnHand, $cardDraw);
+	public function dealCard($cardObj) {
+		//	$cards = ['hearts', 'diamonds', 'clubs', 'spades']; //Tillfäligt, drar kort från högen
+		// $cardObj = $cards[mt_rand(0, count($cards) - 1)];
+		array_push($this->_cardsOnHand, $cardObj);
 	}
 
 	// function cardCount() {
@@ -28,6 +36,14 @@ class Player {
 	// 	}
 	// }
 
+	public function getCardsArray() {
+		return $this->_cardsOnHand;
+	}
+	public function getCardId() {
+		for ($i = 0; $i < count($this->_cardsOnHand); $i++) {
+			return $this->_cardsOnHand[$i]->getCardId();
+		}
+	}
 }
 
 ?>
