@@ -135,7 +135,6 @@ Class Session
 
 	public static function notIsset($name, $location)
 		{
-
 			if(!isset($_SESSION[$name])):
 			{
 				header('Location: ' . $location);

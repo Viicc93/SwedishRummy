@@ -1,4 +1,5 @@
 <?php
+
 class GameFunctions {
 	public $playerCount = array();
 
@@ -10,6 +11,3 @@ class GameFunctions {
 		return count($this->playerCount);
 	}
 }
-
-$GameFunction = new GameFunctions;
-?>
