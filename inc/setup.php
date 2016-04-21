@@ -1,6 +1,7 @@
 
 <?php
 try {
+  define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_deck_obj.txt');
 
   // create an empty array to hold card objects
   $cardsMemory = [];
@@ -52,6 +53,8 @@ try {
             $username = $filtered['user'];
             $user = new User($username); // create user player
             $deck->addPlayers($user); // add players to Deck class
+            $srlz_deck = serialize($deck);
+            file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, $srlz_deck);
       }
       /*
       * If user tries to join without username,

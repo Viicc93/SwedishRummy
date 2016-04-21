@@ -11,7 +11,7 @@ $allCards = [];
 
 $json_file = 'json/cards.json';
 define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
-define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
+
 
 ?>
 <!DOCTYPE html>
