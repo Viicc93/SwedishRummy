@@ -2,7 +2,7 @@
 
 class Player {
 	public $name;
-	protected $_id;
+	// protected $_id;
 	protected $_playerId;
 	public $_cardsOnHand;
 	public $playCard;
@@ -10,8 +10,8 @@ class Player {
 
 	function __construct($name) {
 		$this->_cardsOnHand = [];
-		$this->_id = rand(1, 8);
-		$this->_playerId = $this->_id;
+		$this->_playerId = rand(1, 8);
+		//$this->_playerId = $this->_id;
 	//	global $GameFunction;
 		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
 		// $GameFunction skapades i turn.class.php
