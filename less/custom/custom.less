@@ -1,0 +1,125 @@
+#table {
+  margin: auto;
+  width: 706px;
+  height: 600px;
+  border: 3px dotted white;
+  border-radius: 15px;
+  background: #408000;
+
+  .messages {
+    text-align: center;
+    padding: .2rem;
+    color: @brand-danger;
+    margin-top: 1rem;
+    p {
+      border: 1px solid @brand-danger;
+      background-color: rgba(0, 0, 0, 0.4);
+      vertical-align: middle;
+      padding: 0;
+      margin: 0;
+      padding: 1rem;
+    }
+  }
+}
+// .row {
+//   width: 30%;
+//   height: 600px;
+//   float: left;
+//   display: inline-block;
+// }
+
+.user-form {
+  display: block;
+  margin-top: 1rem;
+  form {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+
+
+.player {
+  margin: 25px auto;
+  width: 300px;
+  height: 150px;
+}
+.player3 {
+  margin-top: 300px;
+  margin-left: -100px;
+  -ms-transform: rotate(90deg);
+  /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  /* Safari */
+  transform: rotate(90deg);
+}
+.player4 {
+  margin-top: 150px;
+  -ms-transform: rotate(270deg);
+  /* IE 9 */
+  -webkit-transform: rotate(270deg);
+  /* Safari */
+  transform: rotate(270deg);
+}
+#cardBox {
+  margin: 10px auto;
+  width: 160px;
+}
+#deck {
+  background: url(../cards/ace_of_diamonds.png) no-repeat;
+  background-size: contain;
+  width: 75px;
+  height: 109px;
+  float: left;
+}
+#playedCard {
+  background: url(../cards/king_of_hearts.png) no-repeat;
+  background-size: contain;
+  float: right;
+  width: 75px;
+  height: 109px;
+}
+#messageBox {
+  margin: 200px auto 10px auto;
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+}
+.c {
+  background: url(../cards/3_of_clubs.png) no-repeat;
+  background-size: contain;
+  width: 75px;
+  height: 109px;
+  margin-left: -60px;
+  float: left;
+}
+.hand {
+  width: 200px;
+  height: 140px;
+  margin-left: 50px;
+}
+/* ==========================================================================
+   CARDS ON TABLE
+   ========================================================================== */
+.middle-row {
+  position: relative;
+}
+.middle-row .cards_on_table img {
+  position: absolute;
+  width: 30%;
+  height: auto;
+  padding: 0;
+}
+
+
+.cards-on-table-users {
+  position: relative;
+  display: table;
+  margin: 0 auto;
+  .card-pos {
+    display: table-cell;
+    img{
+      width: 80%;
+      height: auto;
+    }
+  }
+}
