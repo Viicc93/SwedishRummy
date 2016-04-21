@@ -1,16 +1,11 @@
-
 <?php
+//define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_deck_obj.txt');
 try {
-
   // create an empty array to hold card objects
   $cardsMemory = [];
-
   $deck = new Deck();
-
-
   $countCardsLength = 0;
   $cardId = 0;
-
     // scan cards dir to get cards url
     $cardsArr = scandir('cards');
     // loop through cards url array
@@ -25,12 +20,8 @@ try {
     $img_url = 'cards/' . $item;
     $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
   }
-
-
-
   if (filter_has_var(INPUT_POST, 'submit')){ // if button submit is clicked
     try {
-
            // require fields
            $required = ['user'];
            // instantiate Validator class
@@ -52,6 +43,8 @@ try {
             $username = $filtered['user'];
             $user = new User($username); // create user player
             $deck->addPlayers($user); // add players to Deck class
+            $szDeck = serialize($deck); // serialize Deck object $deck
+            file_put_contents('../txt/serialize_deck_obj.txt', $szDeck); // write serialized string to file
       }
       /*
       * If user tries to join without username,
@@ -63,16 +56,13 @@ try {
         Session::flashSession('missing',$missing);
         // destroy missing session
         Session::destroySession();
-
       }
-
-
-echo "<pre>";
-print_r($deck->getUser());
+//echo "<pre>";
+//print_r($deck->getUser());
     } catch (Exception $e) {
       echo $e;
     }
-	}
+  }
 } catch (Exception $e) {
-	echo $e;
+  echo $e;
 }
