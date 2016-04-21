@@ -5,8 +5,7 @@ class Deck {
    *
    * @var array
    */
-
-	private $_cards;
+  private $_cards;
   private $_cardsOnTable;
   private $_backOfCard;
   private $_users;
@@ -17,7 +16,6 @@ class Deck {
    * It calls addBotPlayer() method to
    * instantiate Bot-class.
    */
-
   public function __construct()
   {
     $this->_cards = [];
@@ -26,11 +24,9 @@ class Deck {
     // add Bot player
     $this->addBotPlayer();
   }
-
   ########################################################################
   # PUBLIC METHODS                                                       #
   ########################################################################
-
   /**
    * Manipulate $_cards array with card object.
    * This method uses composition to manipulate
@@ -38,15 +34,12 @@ class Deck {
    *
    *  @param object  Card  A card object
    */
-
   public function setCards(Card $card)
   {
     $this->_card = $card;
     // push card object to $_cards array
     array_push($this->_cards, $card);
   }
-
-
   public function getCards()
   {
     return $this->_cards;
@@ -67,13 +60,10 @@ class Deck {
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
-
   private function addBotPlayer()
   {
     array_push($this->_users, new Bot());
   }
-
-
   /*
   * Dealing 8 cards to every plyaer. This method
   * will be called from class's constructor when we
@@ -92,30 +82,23 @@ class Deck {
         array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
       }
     }
-   }
   }
-
   public function setUserId()
   {
     // for ($i=0; $i < count($this->_users); $i++) {
     //   echo $this->_users->$_playerId;
     // }
   }
-
   public function getUser()
   {
     return $this->_users;
   }
-
-
   // public function moveCardFromDeck($cardIndex){
   //   array_splice($this->_cards, $cardIndex, 1);
   // }
-
   public function renderDeck($_backOfCard){
     return $this->_backOfCard = $_backOfCard;
   }
-
   public function getCardOnTable()
   {
     for ($i=0; $i < count($this->_cards); $i++) {

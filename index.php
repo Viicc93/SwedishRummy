@@ -1,18 +1,14 @@
 <?php
-
 // require config file
 require_once 'config/config.php';
 require_once 'inc/setup.php';
-
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 error_reporting(-1);
 $allCards = [];
-
 $json_file = 'json/cards.json';
 define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,21 +66,13 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 									<div class="bot-data">
 										<p><?php echo $user->name ?></p>
 											<?php
-
-
-
 											  // $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
 											  // $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
 											  // $allCards['visibleCardsOnTable'] = [];
 											  // file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
 											// file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, serialize($deck));
 											// $obj = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
-
 											// print_r(unserialize($obj));
-
-
-
-
 											?>
 									</div><!-- end bot-data -->
 									<div data-userId="<?php echo $user->getId(); ?>" class="cards-on-table-users bot-cards">
@@ -119,7 +107,6 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 						<?php
 							// $deck->setCardsOnTableBackSideUrl('img/back_of_card.png');
 							$back_side = $deck->getCardOnTable();
-
 							foreach ($back_side as $key => $value):
 						?>
 							<div class="cards_on_table"><a data-id="<?php echo $value->getCardId(); ?>"><img style="z-index: <?php echo $key; ?>; right: <?php echo $key / 2; ?>px" src="<?php echo $value->href ?>" alt=""></a></div>
@@ -134,6 +121,3 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 		</div><!-- end container -->
 	</body>
 </html>
-
-
->>>>>>> mohamadSession
