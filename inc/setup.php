@@ -1,4 +1,5 @@
 <?php
+//define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_deck_obj.txt');
 try {
 	// create an empty array to hold card objects
 	$cardsMemory      = [];
@@ -44,6 +45,8 @@ try {
 				$username = $filtered['user'];
 				$user     = new User($username);// create user player
 				$deck->addPlayers($user);// add players to Deck class
+				$szDeck = serialize($deck);// serialize Deck object $deck
+				file_put_contents('../txt/serialize_deck_obj.txt', $szDeck);// write serialized string to file
 			}
 			/*
 			 * If user tries to join without username,
@@ -56,8 +59,8 @@ try {
 				// destroy missing session
 				Session::destroySession();
 			}
-			echo "<pre>";
-			print_r($deck->getUser());
+			//echo "<pre>";
+			//print_r($deck->getUser());
 		} catch (Exception $e) {
 			echo $e;
 		}
