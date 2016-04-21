@@ -54,12 +54,16 @@ class Deck {
   }
 
   public function dealTest(){
+    for ($j=0; $j < 8; $j++) {
+
+
     for ($i=0; $i < count($this->_users); $i++) {
 
       echo "<pre>";
       array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards) );
 
     }
+   }
   }
 
   public function getUser()
