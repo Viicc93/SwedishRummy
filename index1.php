@@ -11,7 +11,6 @@ $allCards = [];
 
 $json_file = 'json/cards.json';
 define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
-define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 
 ?>
 <!DOCTYPE html>
@@ -19,8 +18,6 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 	<head>
 		<meta charset="UTF-8">
 		<link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 		<title>Swedish Rummy</title>
 	</head>
 <body>
@@ -33,34 +30,12 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 				<div id="wrap">
 					<div id="table">
 						<div class="col-md-12 user-form">
-
-						<form method="POST" class="navbar-form navbar-left">
-						  <div class="form-group">
-						  <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
-						    <input type="text" name="user" class="form-control" placeholder="Username">
-						  </div>
-						  <button type="submit" name="submit" class="btn btn-default">Join</button>
-						</form>
-
+							<form method="post">
+								<input type="text" name="user">
+								<input type="submit" name="submit">
+							</form>
 						</div><!-- end user-form -->
 						<div class="col-md-12 bot-user">
-						<!-- show messages -->
-						<div class="messages">
-							<!-- check if missing fields session has been started -->
-							<?php if(Session::getSession('missing')): ?>
-								<!-- assign missing array to $missing variable -->
-								<?php $missing = Session::flashSession('missing'); ?>
-								<!-- loop through $missing variable -->
-								<?php foreach($missing as $field): ?>
-									<?php switch ($field) {
-										case 'user':
-										?>
-										<p>OBS: You forget to cheese a User Name!</p>
-
-										<?php break;} ?>
-								<?php endforeach; ?>
-							<?php endif; ?>
-						</div><!-- end messages -->
 						<h2>Bot user</h2>
 						<?php if(filter_has_var(INPUT_POST, 'submit')): ?>
 							<?php $username =   $_POST['user'];?>
@@ -70,20 +45,12 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 									<div class="bot-data">
 										<p><?php echo $user->name ?></p>
 											<?php
+											  //drfine json file url
 
-
-
-											  // $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
-											  // $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
-											  // $allCards['visibleCardsOnTable'] = [];
-											  // file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
-											// file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, serialize($deck));
-											// $obj = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
-
-											// print_r(unserialize($obj));
-
-
-
+											  $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
+											  $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
+											  $allCards['visibleCardsOnTable'] = [];
+											  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
 
 											?>
 									</div><!-- end bot-data -->
@@ -98,8 +65,8 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 						</div><!-- end bot-user -->
 								<?php else: ?>
 									<div data-userId="<?php echo $user->getId(); ?>" class="cards-on-table-users user-cards">
-									<?php //$allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
-									<?php  //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
+									<?php $allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
+									<?php  file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
 									<h3>User Cards</h3>
 
 										<?php  for ($i=0; $i < count($user->getCardsArray()); $i++): ?>
@@ -134,3 +101,7 @@ define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_obj.txt');
 		</div><!-- end container -->
 	</body>
 </html>
+
+<?php echo '<pre>';
+print_r($deck->getUser()); ?>
+
