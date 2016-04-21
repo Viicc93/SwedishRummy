@@ -1,19 +1,15 @@
 <?php
 class GameFunctions {
-
 	public $playerCount = array();
 
-	function addPlayer($name){
+	function addPlayer($name) {
 		array_push($this->playerCount, $name);
 	}
 
-	function players(){
+	function players() {
 		return count($this->playerCount);
 	}
 }
 
 $GameFunction = new GameFunctions;
-
-
-
- ?>
+?>
