@@ -23,7 +23,7 @@ try {
     //$card_expl = explode(array('.', '_'), $item);
     $split_img_url = preg_split('/[-_.]+/', $item);
     $img_url = 'cards/' . $item;
-    $card_obj = $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
+    $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
   }
 
 
@@ -43,44 +43,32 @@ try {
            $missing  = $val->getMissing();
            // catch errors
            $errors   = $val->getErrors();
-
+           /*
+           * check that there is no missing field or errors
+           * that returned from Validator-class
+           */
            if (!$missing && !$errors) {
-              $username = $filtered['user'];
-                $user = new User($userName); // create user player
-                $bot = new Bot(); // create bot player
-                $deck->addPlayers($user, $bot); // add players to Deck class
-
-          for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
-            $card_obj = $deck->getCards(); // get card array
-      			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
-      			$botCardIndex = mt_rand(0, count($card_obj));
-			}
-		  }
-   /* for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
-      $card_obj = $deck->getCards(); // get card array
-			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
-			$botCardIndex = mt_rand(0, count($card_obj));
-
-          if ($userCardIndex != $botCardIndex) {
-
-
-                $user->dealCard($card_obj[$userCardIndex]); // send card to dealCard() and push to cardsOnHand array
-                $deck->moveCardFromDeck($userCardIndex); // remove dealed card from deck
-
-                $bot->dealCard($card_obj[$botCardIndex]);
-                $deck->moveCardFromDeck($bodCardIndex);
-          }
-        }
+            // get filtered username returned from Validator-class
+            $username = $filtered['user'];
+            $user = new User($username); // create user player
+            $deck->addPlayers($user); // add players to Deck class
       }
+      /*
+      * If user tries to join without username,
+      * will get a flash message tells that
+      * the username is required.
+      */
       if ($missing) {
         // Sets sessions to show the missing fields
         Session::flashSession('missing',$missing);
         // destroy missing session
         Session::destroySession();
 
+      }
 
 
-    }*/
+echo "<pre>";
+print_r($deck->getUser());
     } catch (Exception $e) {
       echo $e;
     }
