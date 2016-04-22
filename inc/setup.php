@@ -1,5 +1,6 @@
 <?php
 require_once '../config/config.php';
+Session::startSession();
 try {
 
   define('PATH_TO_SERIALIZE_OBJ_FILE', '../txt/serialize_deck_obj.txt');
@@ -69,6 +70,10 @@ try {
             $unSrlz_deck = unserialize($deck_ob);
             $unSrlz_deck->addPlayers($user); // add players to Deck class
             file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, serialize($unSrlz_deck));
+            //echo count($unSrlz_deck->getUser());
+            if (count($unSrlz_deck->getUser()) === 4) {
+              Session::flashSession('errorMessage', 'This game is full!');
+            }
       }
       /*
       * If user tries to join without username,

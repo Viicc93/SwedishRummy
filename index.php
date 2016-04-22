@@ -1,6 +1,7 @@
 <?php
 // require config file
 require_once 'config/config.php';
+Session::startSession();
 define('PATH_TO_SERIALIZE_OBJ_FILE', 'txt/serialize_deck_obj.txt');
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
@@ -27,6 +28,13 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 
 				<div id="wrap">
 					<div id="table">
+					<div class="message">
+						<?php
+							if (Session::getSession('errorMessage')) {
+								echo Session::flashSession('errorMessage');
+							}
+						?>
+					</div>
 						<div class="col-md-12 user-form">
 
 						<form method="POST" action="inc/setup.php" class="navbar-form navbar-left">
@@ -39,10 +47,10 @@ define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
 
 						</div><!-- end user-form -->
 						<?php
-						$ob = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
-						$selz_deck = unserialize($ob);
-						echo "<pre>";
-						print_r($selz_deck->getUser());
+						// $ob = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
+						// $selz_deck = unserialize($ob);
+						// echo "<pre>";
+						// print_r($selz_deck->getUser());
 
 						?>
 
