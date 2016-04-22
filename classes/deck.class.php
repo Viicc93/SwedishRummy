@@ -55,8 +55,10 @@ class Deck {
    * @param object  require user object.
    */
   public function addPlayers(User $user){
-    // push user object to _users array
-    array_push($this->_users, $user);
+    if (count($this->_users) < 4) {
+      // push user object to _users array
+      array_push($this->_users, $user);
+    }
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
