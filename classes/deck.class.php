@@ -78,8 +78,10 @@ class Deck {
     // loop through _users array
     for ($i=0; $i < count($this->_users); $i++) {
       for ($j=0; $j < 8; $j++) {
-        // pop a card-item and push it into _cardsOnHand array
-        array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
+        if (count($this->_users[$i]->_cardsOnHand) < 8) {
+          // pop a card-item and push it into _cardsOnHand array
+          array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
+        }
       }
     }
   }
