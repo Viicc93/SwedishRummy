@@ -2,10 +2,10 @@ var crazyBuilder = (function($) {
 
   // cache dom
   var $body = $('body'),
-      $form = $body.find('.user-form'),
+      $messagesDiv = $body.find('.messages'),
       $section = $('<section/>');
 
-      $form.after($section);
+      $messagesDiv.after($section);
 
 
       // The base object is our "inheritance engine"
@@ -26,8 +26,13 @@ var crazyBuilder = (function($) {
     classMemory.Crazy = Base.extend({
         render: function() {}
     });
-
+    // players prototype
     classMemory.Players = classMemory.Crazy.extend({
+      /**
+       * showName() method is a method that
+       * create a div and print out every user name
+       *
+       */
       showName: function() {
 
         $section.append('<div class="game_users" data-user-id="' +  this._playerId + '"><p>' + this.name + '</p></div>');

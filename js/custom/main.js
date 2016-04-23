@@ -51,19 +51,15 @@ var memory = {},
     resourceByType = {};
 
 crazy8.forEach(function(resource) {
-  // ajax(crazy8.players, null, null, function(data) {
-
-    // create resource object
     memory[resource.list] = resource;
     resourceByList[resource.list] = resource;
     resourceByType[resource.type] = resource;
     countLoadedUsers++;
     if (countLoadedUsers == crazy8.length) {
-      //console.log(resource);
+
       classify();
       playerName();
     }
-  // });
 });
 
 
@@ -75,16 +71,15 @@ function classify() {
     var className = resourceByList[listName].className;
     var classObj  = crazyBuilder.classMemory[className];
 
+    if (list.push) {
+      memory.players[listName] = list.map(function(listItem) {
 
-        if (list.push) {
-          memory.players[listName] = list.map(function(listItem) {
+        return classObj.extend(listItem);
 
-            return classObj.extend(listItem);
-
-          });
-        }else{
-          memory[listName] = classObj.extend(list);
-        }
+      });
+    }else{
+      memory[listName] = classObj.extend(list);
+    }
   }
 };
 

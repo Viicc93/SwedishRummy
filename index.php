@@ -40,38 +40,7 @@
 		<div class="container">
 			<div class="row">
 
-
-				<div id="wrap">
-					<div id="table">
-					<div class="messages">
-						<?php
-
-              /**
-               * If the game is full, mean if there is
-               * 4 players will show a flash message.
-               */
-							if (Session::getSession('errorMessage')) {
-                  // echo errors message
-									echo Session::flashSession('errorMessage');
-
-              /**
-               * If user didn't enter a valid user name,
-               * will show a flash message.
-               */
-								}elseif (Session::getSession('missing')) {
-                  // show missing username message
-                  $missing =  Session::flashSession('missing');
-                  foreach ($missing as $field) {
-                    switch ($field) {
-                      case 'user':
-                        echo "User name is required! Please write you user name.";
-                        break;
-                    }
-                  }
-                }
-						?>
-					</div>
-						<div class="col-md-12 user-form">
+						<div class="col-md-4 user-form">
 
 						<form method="POST" action="inc/setup.php" class="navbar-form navbar-left">
 						  <div class="form-group">
@@ -83,17 +52,36 @@
 
 						</div><!-- end user-form -->
 
-            <!--
-            create users container that has data attribute as user id.
-            this foreach statment will generate 4 divs, one div for every player.
-            -->
-            <?php //foreach($selz_deck->getUserId() as $id): ?>
+        <div id="wrap" class="col-md-8">
+          <div id="table">
+          <div class="messages">
+            <?php
 
-              <!-- <div class="game_users" data-user-id="<?php //echo $id ?>"> -->
+              /**
+               * If the game is full, mean if there is
+               * 4 players will show a flash message.
+               */
+              if (Session::getSession('errorMessage')) {
+                  // echo errors message
+                  echo Session::flashSession('errorMessage');
 
-              </div><!-- end game_users -->
-
-            <?php //endforeach; ?>
+              /**
+               * If user didn't enter a valid user name,
+               * will show a flash message.
+               */
+                }elseif (Session::getSession('missing')) {
+                  // show missing username message
+                  $missing =  Session::flashSession('missing');
+                  foreach ($missing as $field) {
+                    switch ($field) {
+                      case 'user':
+                        echo "User name is required! Please write you user name.";
+                        break;
+                    }
+                  }
+                }
+            ?>
+          </div>
 
           <footer></footer>
         </div><!-- end #table -->
