@@ -10,6 +10,8 @@ class Deck {
   private $_backOfCard;
   private $_users;
   private $_card;
+
+
   /**
    * The constructor define $_cards array,
    *  _cardsOnTable and _users arrays.
@@ -24,6 +26,8 @@ class Deck {
     // add Bot player
     $this->addBotPlayer();
   }
+
+
   ########################################################################
   # PUBLIC METHODS                                                       #
   ########################################################################
@@ -40,10 +44,14 @@ class Deck {
     // push card object to $_cards array
     array_push($this->_cards, $card);
   }
+
+
   public function getCards()
   {
     return $this->_cards;
   }
+
+
   /**
    * Adding players to the game.
    *
@@ -75,8 +83,8 @@ class Deck {
   * _cardsOnHand array that located in Player-class.
   */
   private function dealCardToPlayers(){
-        // shuffle _cards array
-        shuffle($this->_cards);
+    // shuffle _cards array
+    shuffle($this->_cards);
     // loop through _users array
     for ($i=0; $i < count($this->_users); $i++) {
       for ($j=0; $j < 8; $j++) {
@@ -87,25 +95,36 @@ class Deck {
       }
     }
   }
+
+
   public function setUserId()
   {
-    // for ($i=0; $i < count($this->_users); $i++) {
-    //   echo $this->_users->$_playerId;
-    // }
+    for ($i=0; $i < count($this->_users); $i++)
+    {
+      return $this->_users->getUserId()[$i];
+    }
   }
+
+
   public function getUser()
   {
     return $this->_users;
   }
+
+
   // public function moveCardFromDeck($cardIndex){
   //   array_splice($this->_cards, $cardIndex, 1);
   // }
-  public function renderDeck($_backOfCard){
+  public function renderDeck($_backOfCard)
+  {
     return $this->_backOfCard = $_backOfCard;
   }
+
+
   public function getCardOnTable()
   {
-    for ($i=0; $i < count($this->_cards); $i++) {
+    for ($i=0; $i < count($this->_cards); $i++)
+    {
       array_push($this->_cardsOnTable, $this->_cards[$i]);
     }
     shuffle($this->_cardsOnTable);

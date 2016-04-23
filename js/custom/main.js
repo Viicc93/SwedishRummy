@@ -1,12 +1,16 @@
 (function($) {
-// window.onbeforeunload = function() {
-// $.ajax({
-//    url: '../../inc/delete_user.php',
-//    success: function (response) {//response is value returned from php (for your example it's "bye bye"
-//      alert(response);
-//    }
-// });
-//   return false; //here also can be string, that will be shown to the user
-// }
+
+/*
+* variables from index.php
+* 1- deck_users      contains all users in deck-object
+*/
+
+deck_users.forEach(function(data) {
+
+  console.log(data);
+});
+
+
+
 })(jQuery);
 

@@ -1,6 +1,6 @@
 <?php
 class Card {
-  protected $cardId;
+  public $cardId;
   public $value;
   public $suit;
   public $href;

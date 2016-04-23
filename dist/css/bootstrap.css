@@ -6766,6 +6766,7 @@ button.close {
   border-radius: 15px;
 }
 #table .messages {
+  display: inline-block;
   padding: .2rem;
   margin-top: 1rem;
   color: #d9534f;
