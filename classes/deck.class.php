@@ -10,6 +10,8 @@ class Deck {
   private $_backOfCard;
   private $_users;
   private $_card;
+  private $_usersId;
+
 
 
   /**
@@ -96,13 +98,22 @@ class Deck {
     }
   }
 
-
-  public function setUserId()
+  /**
+   * getUserId() method is a method that looping through
+   * user objects, and by using getUserId() method which is
+   * in user object, it will return the array _userId.
+   */
+  public function getUserId()
   {
-    for ($i=0; $i < count($this->_users); $i++)
-    {
-      return $this->_users->getUserId()[$i];
+    // define an array to hold user ids
+    $this->_usersId = [];
+    // loop through users object
+    for ($i=0; $i < count($this->_users); $i++) {
+      // push user ids to $_userId array
+      array_push($this->_usersId, $this->_users[$i]->getUserId());
     }
+    // return _usersId array
+    return $this->_usersId;
   }
 
 

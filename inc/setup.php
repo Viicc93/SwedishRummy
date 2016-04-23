@@ -31,7 +31,8 @@ try {
       array_push($cardsMemory, $cardsArr[$i]);
       //$card_expl = explode(array('.', '_'), $item);
       $split_img_url = preg_split('/[-_.]+/', $cardsArr[$i]);
-      $img_url = '../cards/' . $item;
+      $img_url = 'cards/' . $item;
+      echo $img_url;
 
       $deck->setCards(new Card($i, $split_img_url[0], $split_img_url[2], $img_url));
 
