@@ -6750,13 +6750,19 @@ button.close {
 #table .game_users {
   border: 1px solid red;
 }
-.user-form {
+header .user-form {
   display: block;
-  margin-top: 1rem;
 }
-.user-form form {
+header .user-form .navbar-form {
+  margin: 0;
+}
+header .user-form .navbar-form form {
   display: inline-block;
   margin: 0 auto;
+}
+header .navbar-header {
+  padding: 0;
+  overflow: auto;
 }
 .player {
   margin: 25px auto;

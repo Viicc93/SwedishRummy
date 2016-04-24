@@ -6780,6 +6780,9 @@ button.close {
   background-color: rgba(0, 0, 0, .4);
   border: 1px solid #d9534f;
 }
+#table .game_users {
+  border: 1px solid red;
+}
 .user-form {
   display: block;
   margin-top: 1rem;

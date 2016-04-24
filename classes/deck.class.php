@@ -122,6 +122,11 @@ class Deck {
     return $this->_users;
   }
 
+  public function countUsers()
+  {
+    return count($this->_users);
+  }
+
 
   // public function moveCardFromDeck($cardIndex){
   //   array_splice($this->_cards, $cardIndex, 1);

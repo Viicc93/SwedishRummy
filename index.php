@@ -36,29 +36,39 @@
 	</head>
 <body>
 
-	<header><h1>Swedish Rummy</h1></header>
-		<div class="container">
-			<div class="row">
+	<header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header col-md-12">
+          <div class="brand"><h2><a class="navbar-brand" href="#">Swedish Rummy</a></h2></div><!-- end brand -->
 
-						<div class="col-md-4 user-form">
 
-						<form method="POST" action="inc/setup.php" class="navbar-form navbar-left">
-						  <div class="form-group">
-						  <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
-						    <input type="text" name="user" class="join form-control" placeholder="Username">
-						  </div>
-						  <button type="submit" name="submit" class="btn btn-default">Join</button>
-						</form>
+						<div class="navbar-form navbar-left user-form">
+            <form method="POST" action="inc/setup.php" class="navbar-form navbar-left">
+              <div class="form-group">
+              <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
+                <input type="text" name="user" class="join form-control" placeholder="Username">
+              </div>
+              <button type="submit" name="submit" class="btn btn-default">Join</button>
+            </form>
 
-						</div><!-- end user-form -->
+            </div><!-- end user-form -->
+        </div><!-- end navbar-header -->
+      </div>
+    </nav>
+  </header>
+    <div class="container">
+      <div class="row">
+<?php echo $selz_deck->countUsers(); ?>
 
-        <div id="wrap" class="col-md-8">
+
+        <div id="wrap" class="col-md-12">
           <div id="table">
           <div class="messages">
             <?php
 
               /**
-               * If the game is full, mean if there is
+               * If the game is full, means if there is
                * 4 players will show a flash message.
                */
               if (Session::getSession('errorMessage')) {
