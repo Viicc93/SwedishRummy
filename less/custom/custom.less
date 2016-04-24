@@ -11,6 +11,7 @@
     padding: .2rem;
     color: @brand-danger;
     margin-top: 1rem;
+    display: inline-block;
     p {
       border: 1px solid @brand-danger;
       background-color: rgba(0, 0, 0, 0.4);
@@ -20,20 +21,28 @@
       padding: 1rem;
     }
   }
-}
-// .row {
-//   width: 30%;
-//   height: 600px;
-//   float: left;
-//   display: inline-block;
-// }
 
-.user-form {
-  display: block;
-  margin-top: 1rem;
-  form {
-    display: inline-block;
-    margin: 0 auto;
+  .game_users {
+    border: 1px solid red;
+  }
+}
+
+header {
+
+  .user-form {
+    display: block;
+
+    .navbar-form {
+      margin: 0;
+      form {
+        display: inline-block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .navbar-header {
+    padding: 0;
+    overflow: auto;
   }
 }
 
