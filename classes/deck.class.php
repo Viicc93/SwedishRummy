@@ -64,7 +64,8 @@ class Deck {
    *
    * @param object  require user object.
    */
-  public function addPlayers(User $user){
+  public function addPlayers(User $user)
+  {
     if (count($this->_users) < 4) {
       // push user object to _users array
       array_push($this->_users, $user);
@@ -72,10 +73,14 @@ class Deck {
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
+
+
   private function addBotPlayer()
   {
     array_push($this->_users, new Bot());
   }
+
+
   /*
   * Dealing 8 cards to every plyaer. This method
   * will be called from class's constructor when we
@@ -96,6 +101,11 @@ class Deck {
         }
       }
     }
+  }
+
+  public function showCardsOnHand()
+  {
+    echo 'öalksdjföalskdfj';
   }
 
   /**
