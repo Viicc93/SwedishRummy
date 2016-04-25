@@ -46,4 +46,9 @@ class Player {
 		// 	return $this->_cardsOnHand[$i]->getCardId();
 		// }
 	}
+
+	public function getPlayerName()
+	{
+		return $this->name;
+	}
 }
