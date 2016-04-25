@@ -1,5 +1,9 @@
 (function($) {
 
+  // cache dom
+  var $body = $('body'),
+      $form = $body.find('form');
+
 /*
 * variables from index.php
 * 1- deck_users      contains all users in deck-object "came from index.php"
@@ -59,6 +63,7 @@ crazy8.forEach(function(resource) {
 
       classify();
       playerName();
+      addDealButton();
     }
 });
 
@@ -87,9 +92,16 @@ function playerName() {
   for (var i = 0; i < memory.players.players.length; i++) {
     memory.players.players[i].showName();
 
-    console.log(memory.players.players[i]);
-  };
+  }
+};
+
+function addDealButton() {
+  if (memory.players.players.length > 1) {
+    $form.append('<button type="button" class="btn btn-default">Deal</button>');
+  }
 }
+
+
 
 })(jQuery);
 
