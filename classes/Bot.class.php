@@ -12,8 +12,4 @@ class Bot extends Player {
 	public function RenderCard(){
 		# code to render cards on hand...
 	}
-	public function getId() {
-		return $this->_playerId;
-	}
 }
- ?>
