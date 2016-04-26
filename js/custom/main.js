@@ -18,7 +18,7 @@ var crazy8 = [
     list: 'players'
   }
 ];
-
+console.log(deck_users);
 
 
 /*
