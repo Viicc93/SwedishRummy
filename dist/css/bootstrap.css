@@ -6828,21 +6828,40 @@ header .navbar-header {
 .middle-row {
   position: relative;
 }
-.cards_on_table {
-  border: 1px solid red;
-  margin-top: 4rem;
-  overflow: auto;
+#wrap {
+  position: relative;
 }
-.cards_on_table img {
+#wrap .user-cards {
+  display: inline-block;
+}
+#wrap .cards_on_table {
+  border: 1px solid red;
+  display: inline-block;
+}
+#wrap .cards_on_table img {
   position: absolute;
+  top: 60%;
+  left: 40%;
+  width: 10%;
+  height: auto;
+  padding: 0;
+}
+#wrap .user-cards {
+  display: inline-block;
+  float: left;
+  border: 1px solid red;
+}
+#wrap .user-cards img {
   width: 10%;
   height: auto;
   padding: 0;
 }
 .cards-on-table-users {
   position: relative;
-  display: table;
+  display: inline-block;
   margin: 0 auto;
+  overflow: auto;
+  clear: both;
 }
 .cards-on-table-users .card-pos {
   display: table-cell;

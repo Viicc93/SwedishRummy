@@ -140,13 +140,6 @@ try {
           </div><!-- end messages -->
 
 
-          <div class="cards_on_table">
-          <?php $cardsOnTable = $selz_deck->getCardOnTable(); ?>
-            <?php for($i=0; $i < count($cardsOnTable); $i++): ?>
-            <a data-cardId="<?php echo $cardsOnTable[$i]->getCardId() ?>"><img src="<?php echo  $cardsOnTable[$i]->getCardHref();?>" alt=""></a>
-            <?php endfor; ?>
-          </div><!-- end cards_on_table -->
-
           <footer></footer>
         </div><!-- end #table -->
         </div><!-- end wrap -->

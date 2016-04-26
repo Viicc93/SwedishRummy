@@ -1,5 +1,11 @@
 (function($) {
 
+  // cache dom
+  var $body = $(document).find('body'),
+      $joinForm = $('form'),
+      $cardOnTable = $('<div class="cards_on_table"/>');
+
+
     /*
      * ajax method is the main method that hold jQuery
      * ajax method. this method give us the opportunity
@@ -31,12 +37,50 @@ ajax(deckUrl, null, null, function(data) {
   //console.log(data);
 });
 
+// get cards on table
+var cardsOnTableUrl = 'api/cards_on_table.php';
+$.getJSON(cardsOnTableUrl, function(cards) {
+  for (var i = 0; i < cards.length; i++) {
+    $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img src="' + cards[i]._href + '" /></a>');
+    $('.messages').after($cardOnTable);
+  };
+});
+
+
 
 // get users as json object
-var deckUrl = 'api/get_users.php';
-ajax(deckUrl, null, null, function(users) {
-  console.log(users);
+var usersUrl = 'api/get_users.php';
+$.getJSON(usersUrl, function(users) {
+  if (users.length > 1) {
+    $joinForm.after('<button type="submit" class="deal-cards btn btn-default">Deal Cards</button>');
+    usersInit(users);
+  }
 });
+
+// create user container "div" to hold every user cards
+function usersInit(users) {
+  $body.delegate('.deal-cards', 'click', function(event) {
+    for (var i = 0; i < users.length; i++) {
+      $('.cards_on_table').after('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+      dealUsersCard(users[i]);
+    };
+  });
+}
+
+// deal cards to every user
+function dealUsersCard(users) {
+  var $userHolder = $('.user-cards');
+$userHolder.each(function(el) {
+if ($(this).attr('data-user-id') == users._playerId) {
+  var cardsOnHand = users._cardsOnHand;
+  for(var i in cardsOnHand) {
+    $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img src="' + cardsOnHand[i]._href + '" /></a>');
+  }
+  //console.log(users);
+}
+});
+
+}
 
 })(jQuery);
 
