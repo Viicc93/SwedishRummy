@@ -67,13 +67,6 @@
           </div><!-- end messages -->
 
 
-          <div class="cards_on_table">
-          <?php $cardsOnTable = $selz_deck->getCardOnTable(); ?>
-            <?php for($i=0; $i < count($cardsOnTable); $i++): ?>
-            <a data-cardId="<?php echo $cardsOnTable[$i]->getCardId() ?>"><img src="<?php echo  $cardsOnTable[$i]->getCardHref();?>" alt=""></a>
-            <?php endfor; ?>
-          </div><!-- end cards_on_table -->
-
           <footer></footer>
         </div><!-- end #table -->
         </div><!-- end wrap -->
@@ -81,7 +74,6 @@
     </div><!-- end container -->
   </body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="js/custom/classes.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
 

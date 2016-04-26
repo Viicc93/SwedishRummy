@@ -75,7 +75,7 @@ class Deck {
   }
 
 
-  private function addBotPlayer()
+  public function addBotPlayer()
   {
     array_push($this->_users, new Bot());
   }
@@ -89,7 +89,7 @@ class Deck {
   * _cards array 8 times and then pop an card-item and push it in
   * _cardsOnHand array that located in Player-class.
   */
-  private function dealCardToPlayers(){
+  public function dealCardToPlayers(){
     // shuffle _cards array
     shuffle($this->_cards);
     // loop through _users array
