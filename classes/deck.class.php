@@ -5,12 +5,12 @@ class Deck {
    *
    * @var array
    */
-  private $_cards;
-  private $_cardsOnTable;
-  private $_backOfCard;
-  private $_users;
-  private $_card;
-  private $_usersId;
+  public $_cards;
+  public $_cardsOnTable;
+  public $_backOfCard;
+  public $_users;
+  public $_card;
+  public $_usersId;
 
 
 
@@ -105,7 +105,11 @@ class Deck {
 
   public function showCardsOnHand()
   {
-    echo 'öalksdjföalskdfj';
+
+    for ($i=0; $i < count($this->_users); $i++) {
+      $cards = $this->_users[$i]->getCardsArray();
+    }
+    return $cards;
   }
 
   /**
