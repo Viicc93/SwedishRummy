@@ -2,7 +2,7 @@
 
   // cache dom
   var $body = $('body'),
-      $form = $body.find('form');
+      $form = $body.find('.user-form');
 
 /*
 * variables from index.php
@@ -97,7 +97,8 @@ function playerName() {
 
 function addDealButton() {
   if (memory.players.players.length > 1) {
-    $form.append('<button type="button" class="btn btn-default">Deal</button>');
+    $form.append('<form action="inc/deal_cards.php" method="POST">' +
+      '<button type="submit" name="deal" class="btn btn-default">Deal</button></form>');
   }
 }
 
