@@ -6763,6 +6763,11 @@ header .navbar-header {
   padding: 0;
   overflow: auto;
 }
+header .count-users {
+  display: inline-block;
+  margin: 0;
+  margin-left: 2rem;
+}
 .player {
   margin: 25px auto;
   width: 300px;
@@ -6835,8 +6840,9 @@ header .navbar-header {
   display: inline-block;
 }
 #wrap .cards_on_table {
-  display: inline-block;
-  overflow: auto;
+  position: relative;
+  top: 60%;
+  border: 1px solid red;
 }
 #wrap .cards_on_table img {
   position: absolute;
@@ -6854,14 +6860,19 @@ header .navbar-header {
   width: 15%;
   height: auto;
   padding: 0;
-  margin: 0 -2rem;
+  margin: 0 -2rem 0 0;
+}
+#wrap .user-cards h4 {
+  background-color: #ec971f;
+  padding: .5rem;
+  max-width: 20rem;
+  text-align: center;
+  color: #fff;
 }
 .cards-on-table-users {
   position: relative;
-  display: inline-block;
   margin: 0 auto;
   overflow: auto;
-  clear: both;
 }
 .cards-on-table-users .card-pos {
   display: table-cell;

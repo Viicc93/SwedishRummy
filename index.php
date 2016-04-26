@@ -5,7 +5,7 @@ try {
     	require_once 'config/config.php';
       // start session
     	Session::startSession();
-    	Session::display();
+    	//Session::display();
 
 
       /**
@@ -98,6 +98,7 @@ try {
               <button type="submit" name="submit" class="btn btn-default">Join</button>
             </form>
 
+            <div class="count-users"><p>We have: <?php echo $selz_deck->countUsers(); ?> players on this table!</p></div><!-- end count-users -->
             </div><!-- end user-form -->
         </div><!-- end navbar-header -->
       </div>
@@ -105,7 +106,6 @@ try {
   </header>
     <div class="container">
       <div class="row">
-<?php echo $selz_deck->countUsers(); ?>
 
 
         <div id="wrap" class="col-md-12">
