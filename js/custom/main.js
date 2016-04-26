@@ -25,11 +25,18 @@
         });
     };
 
+// get deck as json object
 var deckUrl = 'api/deck_json.php';
 ajax(deckUrl, null, null, function(data) {
-  console.log(data);
+  //console.log(data);
 });
 
+
+// get users as json object
+var deckUrl = 'api/get_users.php';
+ajax(deckUrl, null, null, function(users) {
+  console.log(users);
+});
 
 })(jQuery);
 

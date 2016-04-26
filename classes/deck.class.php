@@ -5,12 +5,12 @@ class Deck {
    *
    * @var array
    */
-  private $_cards;
-  private $_cardsOnTable;
-  private $_backOfCard;
-  private $_users;
-  private $_card;
-  private $_usersId;
+  public $_cards;
+  public $_cardsOnTable;
+  public $_backOfCard;
+  public $_users;
+  public $_card;
+  public $_usersId;
 
 
 
@@ -75,7 +75,7 @@ class Deck {
   }
 
 
-  private function addBotPlayer()
+  public function addBotPlayer()
   {
     array_push($this->_users, new Bot());
   }
@@ -89,7 +89,7 @@ class Deck {
   * _cards array 8 times and then pop an card-item and push it in
   * _cardsOnHand array that located in Player-class.
   */
-  private function dealCardToPlayers(){
+  public function dealCardToPlayers(){
     // shuffle _cards array
     shuffle($this->_cards);
     // loop through _users array
