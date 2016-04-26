@@ -150,7 +150,6 @@ try {
     <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
 						<script>
-                var deck_users = JSON.parse('<?php echo json_encode($selz_deck->getUser()); ?>');
                 var player_id = '<?php echo Session::getSession("user-id"); ?>';
 						</script>
 </html>

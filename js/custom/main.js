@@ -5,6 +5,8 @@
       $joinForm = $('form'),
       $cardOnTable = $('<div class="cards_on_table"/>');
 
+      console.log(player_id);
+
 
     /*
      * ajax method is the main method that hold jQuery
@@ -74,7 +76,9 @@ $userHolder.each(function(el) {
 if ($(this).attr('data-user-id') == users._playerId) {
   var cardsOnHand = users._cardsOnHand;
   for(var i in cardsOnHand) {
-    $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img src="' + cardsOnHand[i]._href + '" /></a>');
+ users._playerId === player_id ? $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img  src="' + cardsOnHand[i]._href + '" /></a>') : $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img  src="img/back_of_card.png" /></a>');
+
+    console.log(users);
   }
   //console.log(users);
 }

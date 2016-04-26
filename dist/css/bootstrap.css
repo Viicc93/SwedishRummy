@@ -6835,7 +6835,6 @@ header .navbar-header {
   display: inline-block;
 }
 #wrap .cards_on_table {
-  border: 1px solid red;
   display: inline-block;
   overflow: auto;
 }
@@ -6850,12 +6849,12 @@ header .navbar-header {
 #wrap .user-cards {
   display: inline-block;
   float: left;
-  border: 1px solid red;
 }
 #wrap .user-cards img {
-  width: 10%;
+  width: 15%;
   height: auto;
   padding: 0;
+  margin: 0 -2rem;
 }
 .cards-on-table-users {
   position: relative;
