@@ -41,7 +41,7 @@ ajax(deckUrl, null, null, function(data) {
 var cardsOnTableUrl = 'api/cards_on_table.php';
 $.getJSON(cardsOnTableUrl, function(cards) {
   for (var i = 0; i < cards.length; i++) {
-    $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img src="' + cards[i]._href + '" /></a>');
+    $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img src="img/back_of_card.png" /></a>');
     $('.messages').after($cardOnTable);
   };
 });

@@ -6837,6 +6837,7 @@ header .navbar-header {
 #wrap .cards_on_table {
   border: 1px solid red;
   display: inline-block;
+  overflow: auto;
 }
 #wrap .cards_on_table img {
   position: absolute;
