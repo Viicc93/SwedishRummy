@@ -6726,7 +6726,6 @@ button.close {
 }
 #table {
   margin: auto;
-  width: 706px;
   height: 600px;
   border: 3px dotted white;
   border-radius: 15px;

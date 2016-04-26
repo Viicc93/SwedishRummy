@@ -154,7 +154,6 @@ try {
     </div><!-- end container -->
   </body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="js/custom/classes.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
 						<script>
