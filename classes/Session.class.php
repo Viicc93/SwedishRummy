@@ -15,7 +15,6 @@ Class Session
 	 * Stores a session name if it is exests.
 	 */
 	private static $_sessionExists = false;
-
 	 /**
 	 * Start new or resume existing session.
 	 * This method checks if the session is already exists, if it is not then
@@ -31,13 +30,9 @@ Class Session
 				self::$_sessionExists = true;
 			}
 		}
-
-<<<<<<< HEAD
-=======
 	/**
-	 Delete Session description here
+	* Delete Session description here
 	*/
-
 	 public static function deleteSession($name)
 	 {
 	 	if (self::getSession($name))
@@ -45,11 +40,9 @@ Class Session
 	 		unset($_SESSION[$name]);
 	 	}
 	 }
-
 	/**
-		Description here
+	*	Description here
 	*/
-
 	public static function flashSession($name, $string = '')
 	{
 		if (self::getSession($name))
@@ -62,8 +55,6 @@ Class Session
 				self::setSession($name, $string);
 			}
 	}
-
->>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 	 /**
 	 * Sets name and value to a session. It has to parameter $name and $value.
 	 * The first parameter for the session name, and the secon for the session value.
@@ -77,14 +68,12 @@ Class Session
 			// Assign session name to a value.
 			$_SESSION[$name] = $value;
 		}
-
 	 /**
 	 * Gets the assigned session as an array.
 	 * Its has one parameter ($name), the session name.
 	 *
 	 * @param string 	Name of the assigned session.
 	 */
-
 	public static function getSession($name)
 		{
 			// Checks if session has been set.
@@ -96,11 +85,9 @@ Class Session
 						return false;
 					}
 		}
-
 	 /**
 	 * Display the existed session, this method returns an array.
 	 */
-
 	public static function display()
 		{
 			echo "<pre>";
@@ -117,7 +104,6 @@ Class Session
 	 *
 	 * @param URL 	$location 	The full URL to file or web page that we want to be redirected to.
 	 */
-
 	public static function destroySession($location = false)
 		{
 			// Checks if sessions are existed.
@@ -135,22 +121,13 @@ Class Session
 					header('Location: ' . $location);
 				}
 		}
-
 	public static function notIsset($name, $location)
 		{
-<<<<<<< HEAD
-			if(!isset($_SESSION[$name]))
-			{
-				header('Location: ' . $location);
-			}
-=======
 			if(!isset($_SESSION[$name])):
 			{
 				header('Location: ' . $location);
 				exit();
 			}
 			endif;
->>>>>>> 6215cd7f90adea0358f0ddea2e5cb9136dd5a42b
 		}
 }
-

@@ -1,7 +1,6 @@
 #table {
   margin: auto;
-  width: 706px;
-  height: 600px;
+  height: 800px;
   border: 3px dotted white;
   border-radius: 15px;
   background: #408000;
@@ -11,6 +10,7 @@
     padding: .2rem;
     color: @brand-danger;
     margin-top: 1rem;
+    display: inline-block;
     p {
       border: 1px solid @brand-danger;
       background-color: rgba(0, 0, 0, 0.4);
@@ -20,20 +20,34 @@
       padding: 1rem;
     }
   }
-}
-// .row {
-//   width: 30%;
-//   height: 600px;
-//   float: left;
-//   display: inline-block;
-// }
 
-.user-form {
-  display: block;
-  margin-top: 1rem;
-  form {
+  .game_users {
+    border: 1px solid red;
+  }
+}
+
+header {
+
+  .user-form {
+    display: block;
+
+    .navbar-form {
+      margin: 0;
+      form {
+        display: inline-block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .navbar-header {
+    padding: 0;
+    overflow: auto;
+  }
+
+  .count-users {
     display: inline-block;
-    margin: 0 auto;
+    margin: 0;
+    margin-left: 2rem;
   }
 }
 
@@ -103,18 +117,56 @@
 .middle-row {
   position: relative;
 }
-.middle-row .cards_on_table img {
-  position: absolute;
-  width: 30%;
-  height: auto;
-  padding: 0;
+
+#wrap {
+  position: relative;
+  .user-cards {
+    display: inline-block;
+  }
+
+  .game-heading {
+    color: @body-bg;
+    text-align: center;
+    font-size: 10rem;
+  }
+  .cards_on_table {
+    position: relative;
+    top: 50%;
+    border: 1px solid red;
+    img {
+      position: absolute;
+      top: 60%;
+      left: 40%;
+      width: 10%;
+      height: auto;
+      padding: 0;
+    }
+  }
+  .user-cards {
+    display: inline-block;
+    float: left;
+
+    img {
+      width: 15%;
+      height: auto;
+      padding: 0;
+      margin: 0 -2rem 0 0;
+    }
+    h4 {
+      background-color: darken(@brand-warning, 10%);
+      padding: .5rem;
+      max-width: 20rem;
+      text-align: center;
+      color: @body-bg;
+    }
+  }
 }
 
 
 .cards-on-table-users {
   position: relative;
-  display: table;
   margin: 0 auto;
+  overflow: auto;
   .card-pos {
     display: table-cell;
     img{

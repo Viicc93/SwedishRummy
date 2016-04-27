@@ -73,7 +73,6 @@ class Validator
      * Stores an array of fields that are being checked for a Boolean value (true or false).
      */
     protected $_booleans;
-
     /**#@-*/
     /**
      * Constructs a validator object for $_POST or $_GET input.
@@ -107,7 +106,6 @@ class Validator
         $this->_errors = array();
         $this->_booleans = array();
     }
-
     ########################################################################
     # PUBLIC METHODS -- VALIDATION TESTS                                   #
     ########################################################################
@@ -136,7 +134,6 @@ class Validator
             $this->_filterArgs[$fieldName]['options']['max_range'] = $max;
         }
     }
-
     /**
      * Checks whether the submitted value is a floating point number (with or without
      * a decimal fraction).
@@ -170,7 +167,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] = FILTER_FLAG_ALLOW_THOUSAND;
         }
     }
-
     /**
      * Tests an array to ensure that all values are numeric.
      *
@@ -204,7 +200,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_ALLOW_THOUSAND;
         }
     }
-
     /**
      * Checks whether the input conforms to the format of an email address.
      *
@@ -220,7 +215,6 @@ class Validator
         // Set the filter options
         $this->_filterArgs[$fieldName] = FILTER_VALIDATE_EMAIL;
     }
-
     /**
      * Checks that the input conforms to the format of a full URL, including
      * scheme (such as http://).
@@ -245,7 +239,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_QUERY_REQUIRED;
         }
     }
-
     /**
      * Validates URLs in a less strict fashion than isFullURL().
      *
@@ -261,7 +254,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] = FILTER_FLAG_QUERY_REQUIRED;
         }
     }
-
     /**
      * Checks whether the submitted value is a boolean.
      *
@@ -288,7 +280,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] = FILTER_NULL_ON_FAILURE;
         }
     }
-
     /**
      * Matches the submitted value against a Perl-compatible regular expression.
      *
@@ -303,7 +294,6 @@ class Validator
         $this->_filterArgs[$fieldName] = array('filter' => FILTER_VALIDATE_REGEXP,
                                                'options' => array('regexp' => $pattern));
     }
-
     /**
      * Sanitizes a string by removing completely all tags (including PHP and HTML).
      *
@@ -350,7 +340,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_STRIP_HIGH;
         }
     }
-
     /**
      * Sanitizes array by removing completely all tags (including PHP and HTML).
      *
@@ -397,7 +386,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_STRIP_HIGH;
         }
     }
-
     /**
      * Sanitizes input by converting to numeric entities single and double quotes, <, >, &, and
      * characters with an ASCII value of less than 32.
@@ -431,7 +419,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_STRIP_HIGH;
         }
     }
-
     /**
      * Checks the number of characters in the submitted value.
      *
@@ -481,7 +468,6 @@ class Validator
             }
         }
     }
-
     /**
      * This passes through the raw data as submitted.
      *
@@ -510,7 +496,6 @@ class Validator
             $this->_filterArgs[$fieldName]['flags'] |= FILTER_FLAG_ENCODE_AMP;
         }
     }
-
     ##################################################################################
     # PUBLIC METHODS -- VALIDATION AND RESULTS                                       #
     ##################################################################################
@@ -560,7 +545,6 @@ class Validator
         // Return the validated input as an array
         return $this->_filtered;
     }
-
     /**
      * Returns an array of required items that have not been filled in
      *
@@ -570,7 +554,6 @@ class Validator
     {
         return $this->_missing;
     }
-
     /**
      * Returns an array of the filtered data after validation.
      *
@@ -583,7 +566,6 @@ class Validator
     {
         return $this->_filtered;
     }
-
     /**
      * Returns an array containing the names of fields or variables that failed
      * the validation test.
@@ -594,7 +576,6 @@ class Validator
     {
         return $this->_errors;
     }
-
     ############################################################################
     # PROTECTED METHODS                                                        #
     ############################################################################
@@ -620,7 +601,6 @@ class Validator
                 throw new Exception('Invalid input type. Valid types are "post" and "get".');
         }
     }
-
     /**
      * Checks the submitted value of all required items to ensure that the field isn't
      * blank.
@@ -633,14 +613,13 @@ class Validator
     {
         $OK = array();
         foreach ($this->_submitted as $name => $value) {
-			$value = is_array($value) ? $value : trim($value);
-			if (!empty($value)) {
-				$OK[] = $name;
-			}
+            $value = is_array($value) ? $value : trim($value);
+            if (!empty($value)) {
+                $OK[] = $name;
+            }
         }
         $this->_missing = array_diff($this->_required, $OK);
     }
-
     /**
      * Throws an exception if more than one validation test is applied to the current item.
      *
@@ -653,4 +632,3 @@ class Validator
         }
     }
 }
-

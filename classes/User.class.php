@@ -3,8 +3,8 @@ class User extends Player {
 
 	function __construct($name){
 		Parent::__construct($name);
-	}
 
+	}
 	public function PlayCard(){
 		# code for player to play a card on hand...
 	}
@@ -14,9 +14,4 @@ class User extends Player {
 	public function RenderCard(){
 		# code to render cards on hand...
 	}
-
-	public function getId() {
-		return $this->_playerId;
-	}
-
 }

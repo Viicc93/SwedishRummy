@@ -6765,9 +6765,30 @@ button.close {
   border: 3px dotted white;
   border-radius: 15px;
 }
+#table .messages {
+  display: inline-block;
+  padding: .2rem;
+  margin-top: 1rem;
+  color: #d9534f;
+  text-align: center;
+}
+#table .messages p {
+  padding: 0;
+  padding: 1rem;
+  margin: 0;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, .4);
+  border: 1px solid #d9534f;
+}
+#table .game_users {
+  border: 1px solid red;
+}
+.user-form {
+  display: block;
+  margin-top: 1rem;
+}
 .user-form form {
   display: inline-block;
-  padding: 0;
   margin: 0 auto;
 }
 .player {
@@ -6844,16 +6865,17 @@ button.close {
   position: absolute;
   width: 30%;
   height: auto;
+  padding: 0;
 }
-.bot-cards {
+.cards-on-table-users {
   position: relative;
   display: table;
   margin: 0 auto;
 }
-.bot-cards .card-pos {
+.cards-on-table-users .card-pos {
   display: table-cell;
 }
-.bot-cards .card-pos img {
+.cards-on-table-users .card-pos img {
   width: 80%;
   height: auto;
 }
