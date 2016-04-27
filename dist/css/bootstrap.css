@@ -6726,7 +6726,7 @@ button.close {
 }
 #table {
   margin: auto;
-  height: 600px;
+  height: 800px;
   border: 3px dotted white;
   border-radius: 15px;
   background: #408000;
@@ -6762,6 +6762,11 @@ header .user-form .navbar-form form {
 header .navbar-header {
   padding: 0;
   overflow: auto;
+}
+header .count-users {
+  display: inline-block;
+  margin: 0;
+  margin-left: 2rem;
 }
 .player {
   margin: 25px auto;
@@ -6834,10 +6839,15 @@ header .navbar-header {
 #wrap .user-cards {
   display: inline-block;
 }
+#wrap .game-heading {
+  color: #fff;
+  text-align: center;
+  font-size: 10rem;
+}
 #wrap .cards_on_table {
+  position: relative;
+  top: 50%;
   border: 1px solid red;
-  display: inline-block;
-  overflow: auto;
 }
 #wrap .cards_on_table img {
   position: absolute;
@@ -6850,19 +6860,24 @@ header .navbar-header {
 #wrap .user-cards {
   display: inline-block;
   float: left;
-  border: 1px solid red;
 }
 #wrap .user-cards img {
-  width: 10%;
+  width: 15%;
   height: auto;
   padding: 0;
+  margin: 0 -2rem 0 0;
+}
+#wrap .user-cards h4 {
+  background-color: #ec971f;
+  padding: .5rem;
+  max-width: 20rem;
+  text-align: center;
+  color: #fff;
 }
 .cards-on-table-users {
   position: relative;
-  display: inline-block;
   margin: 0 auto;
   overflow: auto;
-  clear: both;
 }
 .cards-on-table-users .card-pos {
   display: table-cell;

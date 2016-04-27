@@ -3,7 +3,12 @@
   // cache dom
   var $body = $(document).find('body'),
       $joinForm = $('form'),
-      $cardOnTable = $('<div class="cards_on_table"/>');
+      $cardOnTable = $('<div class="cards_on_table"/>'),
+      $table = $body.find('#table');
+
+      $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
+
+      console.log(player_id);
 
 
     /*
@@ -35,6 +40,7 @@
 var deckUrl = 'api/deck_json.php';
 ajax(deckUrl, null, null, function(data) {
   //console.log(data);
+
 });
 
 // get cards on table
@@ -43,6 +49,7 @@ $.getJSON(cardsOnTableUrl, function(cards) {
   for (var i = 0; i < cards.length; i++) {
     $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img src="img/back_of_card.png" /></a>');
     $('.messages').after($cardOnTable);
+
   };
 });
 
@@ -62,6 +69,8 @@ function usersInit(users) {
   $body.delegate('.deal-cards', 'click', function(event) {
     for (var i = 0; i < users.length; i++) {
       $('.cards_on_table').after('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+      $table.find('.game-heading').hide('slow');
+      $('button[type="submit"]').prop('disabled', true);
       dealUsersCard(users[i]);
     };
   });
@@ -74,7 +83,9 @@ $userHolder.each(function(el) {
 if ($(this).attr('data-user-id') == users._playerId) {
   var cardsOnHand = users._cardsOnHand;
   for(var i in cardsOnHand) {
-    $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img src="' + cardsOnHand[i]._href + '" /></a>');
+ users._playerId === player_id ? $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img  src="' + cardsOnHand[i]._href + '" /></a>') : $(this).append('<a data-cardId="' + cardsOnHand[i]._cardId + '"><img  src="img/back_of_card.png" /></a>');
+
+    console.log(users);
   }
   //console.log(users);
 }

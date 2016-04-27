@@ -1,4 +1,5 @@
 <?php
+
     require_once '../config/config.php';
     Session::startSession();
 
@@ -29,18 +30,17 @@
           $username = $filtered['user'];
           $user = new User($username); // create user player
 
-          // check if user-id session not exists
-          if (!Session::getSession('user-id')) {
+
             // set user id to session
             Session::setSession('user-id', $user->getUserId());
-          }
+
 
           $deck_ob = file_get_contents(Session::getSession('path_to_serialize_tx'));
           $unSrlz_deck = unserialize($deck_ob);
 
           $unSrlz_deck->addPlayers($user); // add players to Deck class
           file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($unSrlz_deck));
-          //echo count($unSrlz_deck->getUser());
+
           if (count($unSrlz_deck->getUser()) === 4)
           {
             Session::flashSession('errorMessage', 'This game is full!');
