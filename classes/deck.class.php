@@ -5,19 +5,21 @@ class Deck {
    *
    * @var array
    */
+  public $_cards;
+  public $_cardsOnTable;
+  public $_backOfCard;
+  public $_users;
+  public $_card;
+  public $_usersId;
 
-	private $_cards;
-  private $_cardsOnTable;
-  private $_backOfCard;
-  private $_users;
-  private $_card;
+
+
   /**
    * The constructor define $_cards array,
    *  _cardsOnTable and _users arrays.
    * It calls addBotPlayer() method to
    * instantiate Bot-class.
    */
-
   public function __construct()
   {
     $this->_cards = [];
@@ -27,10 +29,10 @@ class Deck {
     $this->addBotPlayer();
   }
 
+
   ########################################################################
   # PUBLIC METHODS                                                       #
   ########################################################################
-
   /**
    * Manipulate $_cards array with card object.
    * This method uses composition to manipulate
@@ -38,7 +40,6 @@ class Deck {
    *
    *  @param object  Card  A card object
    */
-
   public function setCards(Card $card)
   {
     $this->_card = $card;
@@ -51,6 +52,8 @@ class Deck {
   {
     return $this->_cards;
   }
+
+
   /**
    * Adding players to the game.
    *
@@ -61,17 +64,22 @@ class Deck {
    *
    * @param object  require user object.
    */
-  public function addPlayers(User $user){
-    // push user object to _users array
-    array_push($this->_users, $user);
+  public function addPlayers(User $user)
+  {
+    if (count($this->_users) < 4) {
+      // push user object to _users array
+      array_push($this->_users, $user);
+    }
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
 
-  private function addBotPlayer()
+
+  public function addBotPlayer()
   {
     array_push($this->_users, new Bot());
   }
+
 
   /*
   * Dealing 8 cards to every plyaer. This method
@@ -81,42 +89,69 @@ class Deck {
   * _cards array 8 times and then pop an card-item and push it in
   * _cardsOnHand array that located in Player-class.
   */
-  private function dealCardToPlayers(){
-        // shuffle _cards array
-        shuffle($this->_cards);
+
+  public function dealCardToPlayers(){
+    // shuffle _cards array
+    shuffle($this->_cards);
     // loop through _users array
     for ($i=0; $i < count($this->_users); $i++) {
       for ($j=0; $j < 8; $j++) {
-        // pop a card-item and push it into _cardsOnHand array
-        array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
+        if (count($this->_users[$i]->_cardsOnHand) < 8) {
+          // pop a card-item and push it into _cardsOnHand array
+          array_push( $this->_users[$i]->_cardsOnHand, array_pop($this->_cards));
+        }
       }
     }
   }
 
-  public function setUserId()
+  public function showCardsOnHand()
   {
-    // for ($i=0; $i < count($this->_users); $i++) {
-    //   echo $this->_users->$_playerId;
-    // }
+    echo 'öalksdjföalskdfj';
   }
+
+  /**
+   * getUserId() method is a method that looping through
+   * user objects, and by using getUserId() method which is
+   * in user object, it will return the array _userId.
+   */
+  public function getUserId()
+  {
+    // define an array to hold user ids
+    $this->_usersId = [];
+    // loop through users object
+    for ($i=0; $i < count($this->_users); $i++) {
+      // push user ids to $_userId array
+      array_push($this->_usersId, $this->_users[$i]->getUserId());
+    }
+    // return _usersId array
+    return $this->_usersId;
+  }
+
 
   public function getUser()
   {
     return $this->_users;
   }
 
+  public function countUsers()
+  {
+    return count($this->_users);
+  }
+
 
   // public function moveCardFromDeck($cardIndex){
   //   array_splice($this->_cards, $cardIndex, 1);
   // }
-
-  public function renderDeck($_backOfCard){
+  public function renderDeck($_backOfCard)
+  {
     return $this->_backOfCard = $_backOfCard;
   }
 
+
   public function getCardOnTable()
   {
-    for ($i=0; $i < count($this->_cards); $i++) {
+    for ($i=0; $i < count($this->_cards); $i++)
+    {
       array_push($this->_cardsOnTable, $this->_cards[$i]);
     }
     shuffle($this->_cardsOnTable);

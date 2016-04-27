@@ -6766,6 +6766,7 @@ button.close {
   border-radius: 15px;
 }
 #table .messages {
+  display: inline-block;
   padding: .2rem;
   margin-top: 1rem;
   color: #d9534f;
@@ -6778,6 +6779,9 @@ button.close {
   vertical-align: middle;
   background-color: rgba(0, 0, 0, .4);
   border: 1px solid #d9534f;
+}
+#table .game_users {
+  border: 1px solid red;
 }
 .user-form {
   display: block;
