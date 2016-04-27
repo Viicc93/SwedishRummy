@@ -40,6 +40,7 @@
 var deckUrl = 'api/deck_json.php';
 ajax(deckUrl, null, null, function(data) {
   //console.log(data);
+
 });
 
 // get cards on table
