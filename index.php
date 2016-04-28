@@ -1,114 +1,147 @@
 <?php
-// require config file
-require_once 'config/config.php';
-require_once 'inc/setup.php';
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
-$allCards  = [];
-$json_file = 'json/cards.json';
-define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
+try {
+
+	// require config file
+	require_once 'config/config.php';
+	// start session
+	Session::startSession();
+	Session::display();
+
+	/**
+	 * define constant "URL to serialize_deck_obj.txt" file.
+	 * this file contains the serialized version of Deck-object
+	 */
+
+	define('PATH_TO_SERIALIZE_OBJ_FILE', __DIR__ .'/txt/serialize_deck_obj.txt');
+	// create session to hold the constant-url PATH_TO_SERIALIZE_OBJ_FILE
+	Session::setSession('path_to_serialize_tx', PATH_TO_SERIALIZE_OBJ_FILE);
+
+	ini_set('display_startup_errors', 1);
+	ini_set('display_errors', 1);
+	error_reporting(-1);
+
+	$json_file = 'json/cards.json';
+	define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
+
+	// scan cards dir to get cards url
+	$cardsArr = scandir(__DIR__ .'/cards');
+
+	if (!file_exists(Session::getSession('path_to_serialize_tx')) ||
+		filesize(Session::getSession('path_to_serialize_tx')) === 0) {
+		//Session::destroySession();
+
+		// create an empty array to hold card objects
+		$cardsMemory = [];
+		// $ob = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
+		// $selz_deck = unserialize($ob);
+		// $deck = new Deck();
+		$countCardsLength = 0;
+		$cardId           = 0;
+
+		$deck = new Deck();
+
+		// loop through cards url array
+		for ($i = 0; $i < count($cardsArr); $i++) {
+			$countCardsLength++;
+			// ignore mac's hidden files that start with "."
+			if ($cardsArr[$i] == '..' || $cardsArr[$i] == '.' || $cardsArr[$i] == '.DS_Store') {continue;
+			}
+
+			// manipulate cards_url array
+			array_push($cardsMemory, $cardsArr[$i]);
+			//$card_expl = explode(array('.', '_'), $item);
+			$split_img_url = preg_split('/[-_.]+/', $cardsArr[$i]);
+			$img_url       = 'cards/'.$cardsArr[$i];
+
+			$deck->setCards(new Card($i, $split_img_url[0], $split_img_url[2], $img_url));
+
+			$slz_deck = serialize($deck);
+
+			file_put_contents(Session::getSession('path_to_serialize_tx'), $slz_deck);
+		}
+	}
+
+	$ob        = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
+	$selz_deck = unserialize($ob);
+
+} catch (Exception $e) {
+	echo $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
+	<head>
+		<meta charset="UTF-8">
+		<link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
+
     <title>Swedish Rummy</title>
   </head>
 <body>
 
-  <header><h1>Swedish Rummy</h1></header>
-    <div class="container">
-      <div class="row">
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header col-md-12">
+          <div class="brand"><h2><a class="navbar-brand" href="#">Swedish Rummy</a></h2></div><!-- end brand -->
 
 
-        <div id="wrap">
-          <div id="table">
-            <div class="col-md-12 user-form">
-
-            <form method="POST" class="navbar-form navbar-left">
+            <div class="navbar-form navbar-left user-form">
+            <form method="POST" action="inc/setup.php" class="navbar-form navbar-left">
               <div class="form-group">
               <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
-                <input type="text" name="user" class="form-control" placeholder="Username">
+                <input type="text" name="user" class="join form-control" placeholder="Username">
+
               </div>
               <button type="submit" name="submit" class="btn btn-default">Join</button>
             </form>
 
             </div><!-- end user-form -->
-            <div class="col-md-12 bot-user">
-            <!-- show messages -->
-            <div class="messages">
-              <!-- check if missing fields session has been started -->
-<?php if (Session::getSession('missing')):?>
-<!-- assign missing array to $missing variable -->
-<?php $missing = Session::flashSession('missing');?>
-<!-- loop through $missing variable -->
-<?php foreach ($missing as $field):?>
-                  <?php switch ($field) {
-	case 'user':
-		?>
-		<p>OBS: You forget to cheese a User Name!</p>
 
-		<?php break;}?>
-                <?php endforeach;?>
-              <?php endif;?>
+        </div><!-- end navbar-header -->
+      </div>
+    </nav>
+  </header>
+    <div class="container">
+      <div class="row">
+<?php echo $selz_deck->countUsers();?>
+<div id="wrap" class="col-md-12">
+          <div id="table">
+          <div class="messages">
+<?php
+
+/**
+ * If the game is full, means if there is
+ * 4 players will show a flash message.
+ */
+if (Session::getSession('errorMessage')) {
+	// echo errors message
+	echo Session::flashSession('errorMessage');
+
+	/**
+ * If user didn't enter a valid user name,
+ * will show a flash message.
+ */
+} elseif (Session::getSession('missing')) {
+	// show missing username message
+	$missing = Session::flashSession('missing');
+	foreach ($missing as $field) {
+		switch ($field) {
+			case 'user':
+				echo "User name is required! Please write you user name.";
+				break;
+		}
+	}
+}
+?>
 </div><!-- end messages -->
-            <h2>Bot user</h2>
-<?php if (filter_has_var(INPUT_POST, 'submit')):?>
-              <?php $username  = $_POST['user'];?>
-              <?php $gameUsers = $deck->getUser();?>
-              <?php foreach ($gameUsers as $user):?>
-                <?php if ($user->name !== $username):?>
-                  <div class="bot-data">
-                    <p><?php echo $user->name?></p>
-<?php
-// $allCards['botUser'] = ['bot' => $user->name, 'cards' => $user->getCardsArray()];
-// $allCards['invisibleCardsOnTable'] = ['cardsOnTable' => $deck->getCardOnTable()];
-// $allCards['visibleCardsOnTable'] = [];
-// file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_FORCE_OBJECT));
-// file_put_contents(PATH_TO_SERIALIZE_OBJ_FILE, serialize($deck));
-// $obj = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
-// print_r(unserialize($obj));
-?>
-                  </div><!-- end bot-data -->
-                  <div data-userId="<?php echo $user->getId();?>" class="cards-on-table-users bot-cards">
-<?php for ($i = 0; $i < count($user->getCardsArray()); $i++):?>
-                      <div class="card-pos">
 
-                      <a href="" data-id="<?php echo $user->getCardsArray()[$i]->getCardId();?>"><img src="<?php echo $user->getCardsArray()[$i]->getCardHref();?>" alt=""></a>
-                      </div><!-- end card-pos -->
+
+          <div class="cards_on_table">
+<?php $cardsOnTable = $selz_deck->getCardOnTable();?>
+            <?php for ($i = 0; $i < count($cardsOnTable); $i++):?>
+            <a data-cardId="<?php echo $cardsOnTable[$i]->getCardId()?>"><img src="<?php echo $cardsOnTable[$i]->getCardHref();?>" alt=""></a>
 <?php endfor;?>
-</div><!-- end bot-cards -->
-            </div><!-- end bot-user -->
-<?php  else :?>
-                  <div data-userId="<?php echo $user->getId();?>" class="cards-on-table-users user-cards">
-<?php //$allCards['humanUser'] = ['user1' => $username, 'cards' => $user->getCardsArray()] ?>
-                  <?php //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($allCards, JSON_PRETTY_PRINT));?>
-<h3>User Cards</h3>
-
-<?php for ($i = 0; $i < count($user->getCardsArray()); $i++):?>
-                      <div class="card-pos">
-
-                      <a href="" data-id="<?php echo $user->getCardsArray()[$i]->getCardId();?>"><img src="<?php echo $user->getCardsArray()[$i]->getCardHref();?>" alt=""></a>
-                      </div><!-- end card-pos -->
-<?php endfor;?>
-</div><!-- end user-cards -->
-<?php endif;?>
-              <?php endforeach;?>
-            <?php endif;?>
-<div class="middle-row col-md-4">
-
-<?php
-// $deck->setCardsOnTableBackSideUrl('img/back_of_card.png');
-$back_side = $deck->getCardOnTable();
-foreach ($back_side as $key => $value):
-?>
-              <div class="cards_on_table"><a data-id="<?php echo $value->getCardId();?>"><img style="z-index: <?php echo $key;?>; right: <?php echo $key/2;?>px" src="<?php echo $value->href?>" alt=""></a></div>
-<?php endforeach;?>
-</div><!-- end middle-row -->
+          </div><!-- end cards_on_table -->
 
           <footer></footer>
         </div><!-- end #table -->
@@ -116,4 +149,13 @@ foreach ($back_side as $key => $value):
       </div><!-- end row -->
     </div><!-- end container -->
   </body>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="js/custom/classes.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
+
+						<script>
+                var deck_users = JSON.parse('<?php echo json_encode($selz_deck->getUser());?>');
+                var player_id = '<?php echo Session::getSession("user-id");?>';
+						</script>
 </html>
