@@ -52,6 +52,11 @@
         };
     });
 
+    var thrownCardUrl = 'api/thrown_card.php';
+    $.getJSON(thrownCardUrl, function(data) {
+            console.log(data);
+    });
+
 
 
     // get users as json object

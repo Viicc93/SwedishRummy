@@ -78,6 +78,7 @@ class Deck {
   }
 
 
+
   public function addBotPlayer()
   {
     array_push($this->_users, new Bot());
@@ -166,7 +167,7 @@ class Deck {
 
             if ($id === $cardsOnHand[$i]->getCardId()) {
               $index = $i + 1;
-              array_push($this->_thrownCards, array_splice($cardsOnHand, $index, 1));
+              //array_push($this->_thrownCards, array_splice($cardsOnHand, $index, 1));
               return false;
             }
           }
@@ -183,5 +184,15 @@ class Deck {
     }
     shuffle($this->_cardsOnTable);
     return $this->_cardsOnTable;
+  }
+  public function startCard()
+  {
+    $startCard = array_pop($this->_cardsOnTable);
+    array_push($this->_thrownCards, $startCard);
+  }
+
+  public function getThrownCard()
+  {
+    return $this->_thrownCards;
   }
 }
