@@ -80,16 +80,16 @@
              * startCard-method. startCard-method will show
              * the start card on the table "the first thrown card"
              */
-            var deckUrl = 'api/start_card.php';
+          /*  var deckUrl = 'api/start_card.php';
             ajax(deckUrl, 'POST', { action: "start" }, function(data) {
                 console.log(data);
-            });
-
-        // var thrownCardUrl = 'api/thrown_card.php';
-        // $.getJSON(thrownCardUrl, function(cards) {
-        //     $cardOnTable.after('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
-        //     console.log(cards);
-        // });
+            });*/
+        // Put the card to start with on table
+        var thrownCardUrl = 'api/thrown_card.php';
+         $.getJSON(thrownCardUrl, function(cards) {
+             $cardOnTable.after('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
+             console.log(cards);
+         });
         console.log('ölakdjsf');
     }
 
