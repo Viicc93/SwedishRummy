@@ -6,7 +6,7 @@ class Deck {
    * @var array
    */
   public $_cards;
-  public $_cardsOnTable;
+ // public $_cardsOnTable;
   public $_backOfCard;
   public $_users;
   public $_card;
@@ -24,7 +24,7 @@ class Deck {
   public function __construct()
   {
     $this->_cards = [];
-    $this->_cardsOnTable = [];
+ //   $this->_cardsOnTable = [];
     $this->_users = [];
     $this->_thrownCards = [];
 
@@ -186,13 +186,12 @@ class Deck {
     {
       array_push($this->_cardsOnTable, $this->_cards[$i]);
     }
-    shuffle($this->_cardsOnTable);
-    return $this->_cardsOnTable;
+    shuffle($this->_cards);
+    return $this->_cards;
   }
   public function startCard()
   {
-    $startCard = array_pop($this->_cardsOnTable);
-    array_push($this->_thrownCards, $startCard);
+    array_push($this->_thrownCards, array_pop($this->_cards));
   }
 
   public function getThrownCard()

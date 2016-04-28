@@ -53,8 +53,8 @@
     });
 
     var thrownCardUrl = 'api/thrown_card.php';
-    $.getJSON(thrownCardUrl, function(data) {
-            console.log(data);
+    $.getJSON(thrownCardUrl, function(cards) {
+            $cardOnTable.after('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
     });
 
 
