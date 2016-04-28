@@ -49,6 +49,13 @@ try {
   }
         $ob = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
         $selz_deck = unserialize($ob);
+
+        $selz_deck->startCard();
+        print_r($selz_deck->getThrownCard());
+
+
+        //$selz_deck->moveThrownCards(17, Session::getSession('user-id'));
+
 } catch (Exception $e) {
   echo $e->getMessage();
 }

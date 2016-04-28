@@ -6874,6 +6874,9 @@ header .count-users {
   text-align: center;
   color: #fff;
 }
+#wrap .user-cards .active-user {
+  cursor: pointer;
+}
 .cards-on-table-users {
   position: relative;
   margin: 0 auto;

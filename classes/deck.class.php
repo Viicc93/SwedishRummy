@@ -11,6 +11,7 @@ class Deck {
   public $_users;
   public $_card;
   public $_usersId;
+  public $_thrownCards;
 
 
 
@@ -25,6 +26,8 @@ class Deck {
     $this->_cards = [];
     $this->_cardsOnTable = [];
     $this->_users = [];
+    $this->_thrownCards = [];
+
     // add Bot player
     $this->addBotPlayer();
   }
@@ -73,6 +76,7 @@ class Deck {
     // call dealCardToPlayers method
     $this->dealCardToPlayers();
   }
+
 
 
   public function addBotPlayer()
@@ -150,6 +154,31 @@ class Deck {
     return $this->_backOfCard = $_backOfCard;
   }
 
+/**
+ * @param $id
+ *
+ *
+ */
+
+  public function moveThrownCards($id, $userId)
+  {
+    for ($k=0; $k < count($this->_users); $k++) {
+      if ($userId === $this->_users[$k]->getUserId()) {
+
+        $cardsOnHand = $this->_users[$k]->_cardsOnHand;
+        for ($j=0; $j < count($cardsOnHand); $j++) {
+          for ($i = 0; $i < count($cardsOnHand); $i++) {
+
+            if ($id === $cardsOnHand[$i]->getCardId()) {
+              $index = $i + 1;
+              //array_push($this->_thrownCards, array_splice($cardsOnHand, $index, 1));
+              return false;
+            }
+          }
+        }
+      }
+    }
+  }
 
   public function getCardOnTable()
   {
@@ -159,5 +188,15 @@ class Deck {
     }
     shuffle($this->_cardsOnTable);
     return $this->_cardsOnTable;
+  }
+  public function startCard()
+  {
+    $startCard = array_pop($this->_cardsOnTable);
+    array_push($this->_thrownCards, $startCard);
+  }
+
+  public function getThrownCard()
+  {
+    return $this->_thrownCards;
   }
 }
