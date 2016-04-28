@@ -191,7 +191,10 @@ class Deck {
   }
   public function startCard()
   {
-    array_push($this->_thrownCards, array_pop($this->_cards));
+     /*  IF no card to start with get one */
+    if(empty($this->_thrownCards)){
+      array_push($this->_thrownCards, array_pop($this->_cards));
+    }
   }
 
   public function getThrownCard()
