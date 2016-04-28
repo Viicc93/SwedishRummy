@@ -5,12 +5,13 @@ class Deck {
 	 *
 	 * @var array
 	 */
-	private $_cards;
-	private $_cardsOnTable;
-	private $_backOfCard;
-	private $_users;
-	private $_card;
-	private $_usersId;
+	public $_cards;
+	public $_cardsOnTable;
+	public $_backOfCard;
+	public $_users;
+	public $_card;
+	public $_usersId;
+	public $_thrownCards;
 
 	/**
 	 * The constructor define $_cards array,
@@ -19,9 +20,11 @@ class Deck {
 	 * instantiate Bot-class.
 	 */
 	public function __construct() {
-		// $this->_cards        = [];
+		$this->_cards        = [];
 		$this->_cardsOnTable = [];
 		$this->_users        = [];
+		$this->_thrownCards  = [];
+
 		// add Bot player
 		$this->addBotPlayer();
 	}
@@ -37,7 +40,7 @@ class Deck {
 	 *  @param object  Card  A card object
 	 */
 	public function setCards(Card $card) {
-		// $this->_card = $card;
+		$this->_card = $card;
 		// push card object to $_cards array
 		array_push($this->_cards, $card);
 	}
@@ -65,7 +68,7 @@ class Deck {
 		$this->dealCardToPlayers();
 	}
 
-	private function addBotPlayer() {
+	public function addBotPlayer() {
 		array_push($this->_users, new Bot());
 	}
 
@@ -77,7 +80,7 @@ class Deck {
 	 * _cards array 8 times and then pop an card-item and push it in
 	 * _cardsOnHand array that located in Player-class.
 	 */
-	private function dealCardToPlayers() {
+	public function dealCardToPlayers() {
 		// shuffle _cards array
 		shuffle($this->_cards);
 		// loop through _users array
@@ -127,11 +130,44 @@ class Deck {
 		return $this->_backOfCard = $_backOfCard;
 	}
 
+	/**
+	 * @param $id
+	 *
+	 *
+	 */
+
+	public function moveThrownCards($id, $userId) {
+		for ($k = 0; $k < count($this->_users); $k++) {
+			if ($userId === $this->_users[$k]->getUserId()) {
+
+				$cardsOnHand = $this->_users[$k]->_cardsOnHand;
+				for ($j = 0; $j < count($cardsOnHand); $j++) {
+					for ($i = 0; $i < count($cardsOnHand); $i++) {
+
+						if ($id === $cardsOnHand[$i]->getCardId()) {
+							$index = $i+1;
+							//array_push($this->_thrownCards, array_splice($cardsOnHand, $index, 1));
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public function getCardOnTable() {
 		for ($i = 0; $i < count($this->_cards); $i++) {
 			array_push($this->_cardsOnTable, $this->_cards[$i]);
 		}
 		shuffle($this->_cardsOnTable);
 		return $this->_cardsOnTable;
+	}
+	public function startCard() {
+		$startCard = array_pop($this->_cardsOnTable);
+		array_push($this->_thrownCards, $startCard);
+	}
+
+	public function getThrownCard() {
+		return $this->_thrownCards;
 	}
 }

@@ -1,108 +1,104 @@
 (function($) {
 
-  // cache dom
-  var $body = $('body'),
-      $form = $body.find('.user-form');
+    // cache dom
+    var $body = $(document).find('body'),
+        $joinForm = $('form'),
+        $cardOnTable = $('<div class="cards_on_table"/>'),
+        $table = $body.find('#table');
 
-/*
-* variables from index.php
-* 1- deck_users      contains all users in deck-object "came from index.php"
-* 2- plyaer_id       contains 1 user id "came from index.php"
-*/
+    $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
 
-var crazy8 = [
-  {
-    players: deck_users,
-    className: 'Players',
-    type: 'player',
-    list: 'players'
-  }
-];
-console.log(deck_users);
+    console.log(player_id);
 
 
-/*
- * ajax method is the main method that hold jQuery
- * ajax method. this method give us the opportunity
- * to use HTTP methods for RESTfull services like
- * POST, GET, PUT, PATCH and DELETE
- */
-function ajax(url, type, data, callBack) {
-    // define the default HTTP method
-    type = type || 'GET';
-    // assign jQuery ajax method to res variable
-    var res = $.ajax({
-        url: url,
-        type: type,
-        data: data
+    /*
+     * ajax method is the main method that hold jQuery
+     * ajax method. this method give us the opportunity
+     * to use HTTP methods for RESTfull services like
+     * POST, GET, PUT, PATCH and DELETE
+     */
+    function ajax(url, type, data, callBack) {
+        // define the default HTTP method
+        type = type || 'GET';
+        // assign jQuery ajax method to res variable
+        var res = $.ajax({
+            url: url,
+            type: type,
+            data: data
+        });
+        // if the request success will call the callback function
+        res.success(function(data) {
+            callBack(data);
+        });
+        // if failed dispaly the error details
+        res.fail(function(err) {
+            console.error('response err', err.status);
+        });
+    };
+
+    // get deck as json object
+    var deckUrl = 'api/deck_json.php';
+    ajax(deckUrl, null, null, function(data) {
+        //console.log(data);
+
     });
-    // if the request success will call the callback function
-    res.success(function(data) {
-        callBack(data);
+
+    // get cards on table
+    var cardsOnTableUrl = 'api/cards_on_table.php';
+    $.getJSON(cardsOnTableUrl, function(cards) {
+        for (var i = 0; i < cards.length; i++) {
+            $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img data-cardId="' + cards[i]._cardId + '" class="cards-pos" src="img/back_of_card.png" /></a>');
+            $('.messages').after($cardOnTable);
+        };
     });
-    // if failed dispaly the error details
-    res.fail(function(err) {
-        console.error('response err', err.status);
+
+    var thrownCardUrl = 'api/thrown_card.php';
+    $.getJSON(thrownCardUrl, function(data) {
+            console.log(data);
     });
-};
 
 
-// create memory object to hold all that we'll get from resources
-var memory = {},
-    countLoadedUsers = 0,
 
-    resourceByList = {},
-    resourceByType = {};
+    // get users as json object
+    var usersUrl = 'api/get_users.php';
+    $.getJSON(usersUrl, function(users) {
+        if (users.length > 1) {
+            $joinForm.after('<button type="submit" class="deal-cards btn btn-default">Deal Cards</button>');
+            usersInit(users);
+        }
+    });
 
-crazy8.forEach(function(resource) {
-    memory[resource.list] = resource;
-    resourceByList[resource.list] = resource;
-    resourceByType[resource.type] = resource;
-    countLoadedUsers++;
-    if (countLoadedUsers == crazy8.length) {
-
-      classify();
-      playerName();
-      addDealButton();
+    // create user container "div" to hold every user cards
+    function usersInit(users) {
+        $body.delegate('.deal-cards', 'click', function(event) {
+            for (var i = 0; i < users.length; i++) {
+                $('.cards_on_table').after('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+                $table.find('.game-heading').hide('slow');
+                $('button[type="submit"]').prop('disabled', true);
+                dealUsersCard(users[i]);
+            };
+        });
     }
-});
 
+    // deal cards to every user
+    function dealUsersCard(users) {
+        // get wrapper div
+        var $userHolder = $('.user-cards');
+        // loop through user divs
+        $userHolder.each(function(el) {
+          // check user id
+            if ($(this).attr('data-user-id') == users._playerId) {
+                var cardsOnHand = users._cardsOnHand;
+                for (var i in cardsOnHand) {
+                    // if the user id in data-user-id the same user-id that came from the session to show picture side of the card, otherwise the backside will be shown
+                    users._playerId === player_id ? $(this).append('<a class="active-user" data-cardId="' + cardsOnHand[i]._cardId + '">' +
+                      '<img data-cardId="' + cardsOnHand[i]._cardId + '" src="' + cardsOnHand[i]._href + '" /></a>') : $(this).append('<a style="pointer-events: none;" data-cardId="' + cardsOnHand[i]._cardId + '">' +
+                      '<img data-cardId="' + cardsOnHand[i]._cardId + '"  src="img/back_of_card.png" /></a>');
+                }
+                //console.log(users);
+            }
+        });
 
-
-function classify() {
-  for(listName in memory) {
-    var list = memory.players[listName];
-
-    var className = resourceByList[listName].className;
-    var classObj  = crazyBuilder.classMemory[className];
-
-    if (list.push) {
-      memory.players[listName] = list.map(function(listItem) {
-
-        return classObj.extend(listItem);
-
-      });
-    }else{
-      memory[listName] = classObj.extend(list);
     }
-  }
-};
-
-function playerName() {
-  for (var i = 0; i < memory.players.players.length; i++) {
-    memory.players.players[i].showName();
-
-  }
-};
-
-function addDealButton() {
-  if (memory.players.players.length > 1) {
-    $form.append('<form action="inc/deal_cards.php" method="POST">' +
-      '<button type="submit" name="deal" class="btn btn-default">Deal</button></form>');
-  }
-}
-
-
 
 })(jQuery);
-

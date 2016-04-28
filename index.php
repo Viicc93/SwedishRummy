@@ -5,7 +5,7 @@ try {
 	require_once 'config/config.php';
 	// start session
 	Session::startSession();
-	Session::display();
+	//Session::display();
 
 	/**
 	 * define constant "URL to serialize_deck_obj.txt" file.
@@ -63,6 +63,10 @@ try {
 
 	$ob        = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
 	$selz_deck = unserialize($ob);
+	$selz_deck->startCard();
+	print_r($selz_deck->getThrownCard());
+
+	//$selz_deck->moveThrownCards(17, Session::getSession('user-id'));
 
 } catch (Exception $e) {
 	echo $e->getMessage();
@@ -70,10 +74,9 @@ try {
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
-
+  <head>
+    <meta charset="UTF-8">
+    <link href="dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
     <title>Swedish Rummy</title>
   </head>
 <body>
@@ -90,21 +93,21 @@ try {
               <div class="form-group">
               <!-- <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span> -->
                 <input type="text" name="user" class="join form-control" placeholder="Username">
-
               </div>
               <button type="submit" name="submit" class="btn btn-default">Join</button>
             </form>
 
+            <div class="count-users"><p>We have: <?php echo $selz_deck->countUsers();?>players on this table!</p></div><!-- end count-users -->
             </div><!-- end user-form -->
-
         </div><!-- end navbar-header -->
       </div>
     </nav>
   </header>
     <div class="container">
       <div class="row">
-<?php echo $selz_deck->countUsers();?>
-<div id="wrap" class="col-md-12">
+
+
+        <div id="wrap" class="col-md-12">
           <div id="table">
           <div class="messages">
 <?php
@@ -133,15 +136,8 @@ if (Session::getSession('errorMessage')) {
 	}
 }
 ?>
-</div><!-- end messages -->
+          </div><!-- end messages -->
 
-
-          <div class="cards_on_table">
-<?php $cardsOnTable = $selz_deck->getCardOnTable();?>
-            <?php for ($i = 0; $i < count($cardsOnTable); $i++):?>
-            <a data-cardId="<?php echo $cardsOnTable[$i]->getCardId()?>"><img src="<?php echo $cardsOnTable[$i]->getCardHref();?>" alt=""></a>
-<?php endfor;?>
-          </div><!-- end cards_on_table -->
 
           <footer></footer>
         </div><!-- end #table -->
@@ -149,13 +145,10 @@ if (Session::getSession('errorMessage')) {
       </div><!-- end row -->
     </div><!-- end container -->
   </body>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="js/custom/classes.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
 
-						<script>
-                var deck_users = JSON.parse('<?php echo json_encode($selz_deck->getUser());?>');
+            <script>
                 var player_id = '<?php echo Session::getSession("user-id");?>';
-						</script>
+            </script>
 </html>

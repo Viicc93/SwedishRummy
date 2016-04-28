@@ -1,9 +1,9 @@
 <?php
 class Card {
-  private $_cardId;
-  private $_value;
-  private $_suit;
-  private $_href;
+  public $_cardId;
+  public $_value;
+  public $_suit;
+  public $_href;
   function __construct($cardId, $value, $suit, $href){
     $this->_cardId = $cardId;
     $this->_value = $value;
