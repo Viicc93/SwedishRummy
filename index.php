@@ -43,6 +43,7 @@ try {
       $split_img_url = preg_split('/[-_.]+/', $cardsArr[$i]);
       $img_url = 'cards/' . $cardsArr[$i];
       $deck->setCards(new Card($i, $split_img_url[0], $split_img_url[2], $img_url));
+
       $slz_deck = serialize($deck);
       file_put_contents(Session::getSession('path_to_serialize_tx'), $slz_deck);
     }
