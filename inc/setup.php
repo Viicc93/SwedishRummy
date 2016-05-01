@@ -39,7 +39,7 @@
           $unSrlz_deck = unserialize($deck_ob);
 
           $unSrlz_deck->addPlayers($user); // add players to Deck class
-          //$unSrlz_deck->startCard();
+          $unSrlz_deck->startCard();
 
           file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($unSrlz_deck));
 

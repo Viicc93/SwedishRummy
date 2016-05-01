@@ -6845,17 +6845,14 @@ header .count-users {
   font-size: 10rem;
 }
 #wrap .cards_on_table {
-  position: relative;
-  top: 50%;
-  border: 1px solid red;
+  display: inline-block;
+  width: 50%;
+  height: auto;
 }
 #wrap .cards_on_table img {
-  position: absolute;
-  top: 60%;
-  left: 40%;
   width: 10%;
   height: auto;
-  padding: 0;
+  position: absolute;
 }
 #wrap .user-cards {
   display: inline-block;
