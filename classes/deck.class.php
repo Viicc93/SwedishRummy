@@ -160,25 +160,44 @@ class Deck {
  *
  */
 
-  public function moveThrownCards($id, $userId)
+  public function playCard($cardId, $userId)
   {
-    for ($k=0; $k < count($this->_users); $k++) {
-      if ($userId === $this->_users[$k]->getUserId()) {
+    //echo 'card-id' . $cardId . 'user-id: ' . $userId;
+    //$this->findCard();
+    $foundCard =  $this->findPlayer($cardId, $userId);
+    $latestCard = end($this->_thrownCards);
+    if ($foundCard->_value == 8) {
+      echo " 8 ";
+    }elseif ($foundCard->_value == $latestCard->_value || $foundCard->_suit == $latestCard->_suit) {
+      echo " you can play ";
+    }
 
-        $cardsOnHand = $this->_users[$k]->_cardsOnHand;
-        for ($j=0; $j < count($cardsOnHand); $j++) {
-          for ($i = 0; $i < count($cardsOnHand); $i++) {
+  }
 
-            if ($id === $cardsOnHand[$i]->getCardId()) {
-              $index = $i + 1;
-              //array_push($this->_thrownCards, array_splice($cardsOnHand, $index, 1));
-              return false;
-            }
-          }
-        }
+  private function findPlayer($cardId, $userId)
+  {
+    for ($i=0; $i < count($this->_users); $i++) {
+      if ($this->_users[$i]->_playerId === $userId) {
+        return $this->findCard($this->_users[$i]->_cardsOnHand, $cardId);
+      //   for ($j=0; $j < count($this->_users[$i]->_cardsOnHand); $j++) {
+
+      //   }
+
+      // print_r($this->_users[$i]->_cardsOnHand);
       }
     }
   }
+
+  private function findCard($cardsOnhand, $cardId)
+  {
+    foreach ($cardsOnhand as $card) {
+      if ($card->getCardId() == $cardId) {
+        return $card;
+      }
+    }
+    //print_r($cardsOnhand);
+  }
+
 
   public function getCardOnTable()
   {
@@ -200,5 +219,12 @@ class Deck {
   public function getThrownCard()
   {
     return $this->_thrownCards;
+  }
+
+  public function nextPlayer()
+  {
+    for ($i=0; $i < count($this->_users); $i++) {
+      return $this->_users[$i];
+    }
   }
 }
