@@ -96,34 +96,6 @@ try {
         <div id="wrap" class="col-md-12">
           <div id="table">
           <div class="messages">
-<<<<<<< HEAD
-<?php
-
-/**
- * If the game is full, means if there is
- * 4 players will show a flash message.
- */
-if (Session::getSession('errorMessage')) {
-	// echo errors message
-	echo Session::flashSession('errorMessage');
-
-	/**
- * If user didn't enter a valid user name,
- * will show a flash message.
- */
-} elseif (Session::getSession('missing')) {
-	// show missing username message
-	$missing = Session::flashSession('missing');
-	foreach ($missing as $field) {
-		switch ($field) {
-			case 'user':
-				echo "User name is required! Please write you user name.";
-				break;
-		}
-	}
-}
-?>
-=======
 <?php
 /**
  * If the game is full, means if there is
@@ -148,8 +120,7 @@ if (Session::getSession('errorMessage')) {
 	}
 }
 ?>
->>>>>>> master
-          </div><!-- end messages -->
+</div><!-- end messages -->
 
 
           <footer></footer>
@@ -160,12 +131,4 @@ if (Session::getSession('errorMessage')) {
   </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="js/custom/main.js" type="text/javascript" charset="utf-8" async defer></script>
-
-            <script>
-<<<<<<< HEAD
-                var player_id = '<?php echo Session::getSession("user-id");?>';
-=======
-                var player_id = '<?php echo Session::getSession("user-id");?>';
->>>>>>> master
-            </script>
 </html>
