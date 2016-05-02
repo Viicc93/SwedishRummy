@@ -166,9 +166,9 @@ class Deck {
     //$this->findCard();
     $foundCard =  $this->findPlayer($cardId, $userId);
     $latestCard = end($this->_thrownCards);
-    if ($foundCard->_value == 8) {
+    if ($foundCard[0]->getCardValue() == 8) {
       echo " 8 ";
-    }elseif ($foundCard->_value == $latestCard->_value || $foundCard->_suit == $latestCard->_suit) {
+    }elseif ($foundCard[0]->getCardValue() == $latestCard->getCardValue() || $foundCard[0]->getCardSuit() == $latestCard->getCardSuit()) {
       array_push($this->_thrownCards, $foundCard);
       print_r($this->_thrownCards);
     }
