@@ -169,7 +169,8 @@ class Deck {
     if ($foundCard->_value == 8) {
       echo " 8 ";
     }elseif ($foundCard->_value == $latestCard->_value || $foundCard->_suit == $latestCard->_suit) {
-      echo " you can play ";
+      array_push($this->_thrownCards, $foundCard);
+      print_r($this->_thrownCards);
     }
 
   }
@@ -190,8 +191,9 @@ class Deck {
 
   private function findCard($cardsOnhand, $cardId)
   {
-    foreach ($cardsOnhand as $card) {
+    foreach ($cardsOnhand as $i => $card) {
       if ($card->getCardId() == $cardId) {
+        $card = array_splice($cardsOnhand, $i, 1);
         return $card;
       }
     }
