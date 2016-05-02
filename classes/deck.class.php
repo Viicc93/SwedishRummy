@@ -1,12 +1,13 @@
 <?php
 class Deck {
+
 	/**
 	 * Card array
 	 *
 	 * @var array
 	 */
 	public $_cards;
-	public $_cardsOnTable;
+	// public $_cardsOnTable;
 	public $_backOfCard;
 	public $_users;
 	public $_card;
@@ -20,10 +21,10 @@ class Deck {
 	 * instantiate Bot-class.
 	 */
 	public function __construct() {
-		$this->_cards        = [];
-		$this->_cardsOnTable = [];
-		$this->_users        = [];
-		$this->_thrownCards  = [];
+		$this->_cards = [];
+		//   $this->_cardsOnTable = [];
+		$this->_users       = [];
+		$this->_thrownCards = [];
 
 		// add Bot player
 		$this->addBotPlayer();
@@ -95,7 +96,11 @@ class Deck {
 	}
 
 	public function showCardsOnHand() {
-		echo 'öalksdjföalskdfj';
+
+		for ($i = 0; $i < count($this->_users); $i++) {
+			$cards = $this->_users[$i]->getCardsArray();
+		}
+		return $cards;
 	}
 
 	/**
@@ -159,12 +164,14 @@ class Deck {
 		for ($i = 0; $i < count($this->_cards); $i++) {
 			array_push($this->_cardsOnTable, $this->_cards[$i]);
 		}
-		shuffle($this->_cardsOnTable);
-		return $this->_cardsOnTable;
+		shuffle($this->_cards);
+		return $this->_cards;
 	}
 	public function startCard() {
-		$startCard = array_pop($this->_cardsOnTable);
-		array_push($this->_thrownCards, $startCard);
+		/*  IF no card to start with get one */
+		if (empty($this->_thrownCards)) {
+			array_push($this->_thrownCards, array_pop($this->_cards));
+		}
 	}
 
 	public function getThrownCard() {

@@ -3,7 +3,8 @@
     // cache dom
     var $body = $(document).find('body'),
         $joinForm = $('form'),
-        $cardOnTable = $('<div class="cards_on_table"/>'),
+        $cardOnTable = $('<div class="cards_on_table table"/>'),
+        $thrownCards = $('<div class="cards_on_table thrown"/>'),
         $table = $body.find('#table');
 
     $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
@@ -36,12 +37,6 @@
         });
     };
 
-    // get deck as json object
-    var deckUrl = 'api/deck_json.php';
-    ajax(deckUrl, null, null, function(data) {
-        //console.log(data);
-
-    });
 
     // get cards on table
     var cardsOnTableUrl = 'api/cards_on_table.php';
@@ -52,10 +47,6 @@
         };
     });
 
-    var thrownCardUrl = 'api/thrown_card.php';
-    $.getJSON(thrownCardUrl, function(data) {
-            console.log(data);
-    });
 
 
 
@@ -71,14 +62,39 @@
     // create user container "div" to hold every user cards
     function usersInit(users) {
         $body.delegate('.deal-cards', 'click', function(event) {
+
+
             for (var i = 0; i < users.length; i++) {
-                $('.cards_on_table').after('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
                 $table.find('.game-heading').hide('slow');
-                $('button[type="submit"]').prop('disabled', true);
                 dealUsersCard(users[i]);
             };
+            $('button[type="submit"]').prop('disabled', true);
+            startCard();
         });
+    };
+
+    function startCard() {
+
+        var thrownCardUrl = 'api/thrown_card.php';
+        $.getJSON(thrownCardUrl, function(cards) {
+            $cardOnTable.after($thrownCards);
+            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>')
+            console.log(cards);
+        });
+            /**
+             * send POST request to start_card.php to call
+             * startCard-method. startCard-method will show
+             * the start card on the table "the first thrown card"
+             */
+            // var deckUrl = 'api/start_card.php';
+            // ajax(deckUrl, 'POST', { action: "start" }, function(data) {
+            //     console.log(data);
+            // });
+
+        console.log('ölakdjsf');
     }
+
 
     // deal cards to every user
     function dealUsersCard(users) {
@@ -86,19 +102,18 @@
         var $userHolder = $('.user-cards');
         // loop through user divs
         $userHolder.each(function(el) {
-          // check user id
+            // check user id
             if ($(this).attr('data-user-id') == users._playerId) {
                 var cardsOnHand = users._cardsOnHand;
                 for (var i in cardsOnHand) {
                     // if the user id in data-user-id the same user-id that came from the session to show picture side of the card, otherwise the backside will be shown
                     users._playerId === player_id ? $(this).append('<a class="active-user" data-cardId="' + cardsOnHand[i]._cardId + '">' +
-                      '<img data-cardId="' + cardsOnHand[i]._cardId + '" src="' + cardsOnHand[i]._href + '" /></a>') : $(this).append('<a style="pointer-events: none;" data-cardId="' + cardsOnHand[i]._cardId + '">' +
-                      '<img data-cardId="' + cardsOnHand[i]._cardId + '"  src="img/back_of_card.png" /></a>');
+                        '<img data-cardId="' + cardsOnHand[i]._cardId + '" src="' + cardsOnHand[i]._href + '" /></a>') : $(this).append('<a style="pointer-events: none;" data-cardId="' + cardsOnHand[i]._cardId + '">' +
+                        '<img data-cardId="' + cardsOnHand[i]._cardId + '"  src="img/back_of_card.png" /></a>');
                 }
                 //console.log(users);
             }
         });
-
     }
 
 })(jQuery);
