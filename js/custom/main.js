@@ -37,15 +37,46 @@
         });
     };
 
+    function whichPlayer() {
+        var url = 'json/game_status.json';
+        ajax(url, null, null, function(queue) {
+            thisPlayer(queue.whichPlayer);
+        });
+    }
 
-    // get cards on table
-    var cardsOnTableUrl = 'api/cards_on_table.php';
-    $.getJSON(cardsOnTableUrl, function(cards) {
-        for (var i = 0; i < cards.length; i++) {
-            $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img data-cardId="' + cards[i]._cardId + '" class="cards-pos" src="img/back_of_card.png" /></a>');
-            $('.messages').after($cardOnTable);
-        };
-    });
+    function thisPlayer(index) {
+       var url = 'api/game_queue.php';
+       ajax(url, 'POST', { indx: index }, function(data) {
+        console.log(data);
+       });
+    }
+
+
+
+
+    // create user container "div" to hold every user cards
+    function usersInit(users) {
+        $body.delegate('.deal-cards', 'click', function(event) {
+
+            for (var i = 0; i < users.length; i++) {
+                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+                $table.find('.game-heading').hide('slow');
+                dealUsersCard(users[i]);
+            };
+            $('button[type="submit"]').prop('disabled', true);
+            startCard();
+            whichPlayer();
+        });
+    };
+
+        // get cards on table
+        var cardsOnTableUrl = 'api/cards_on_table.php';
+         $.getJSON(cardsOnTableUrl, function(cards) {
+            for (var i = 0; i < cards.length; i++) {
+                $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img data-cardId="' + cards[i]._cardId + '" class="cards-pos" src="img/back_of_card.png" /></a>');
+                $('.messages').after($cardOnTable);
+            };
+        });
 
 
 
@@ -59,29 +90,17 @@
         }
     });
 
-    // create user container "div" to hold every user cards
-    function usersInit(users) {
-        $body.delegate('.deal-cards', 'click', function(event) {
 
 
-            for (var i = 0; i < users.length; i++) {
-                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
-                $table.find('.game-heading').hide('slow');
-                dealUsersCard(users[i]);
-            };
-            $('button[type="submit"]').prop('disabled', true);
-            startCard();
-        });
-    };
 
     function startCard() {
 
         var thrownCardUrl = 'api/thrown_card.php';
         $.getJSON(thrownCardUrl, function(cards) {
             $cardOnTable.after($thrownCards);
-            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>')
-            console.log(cards);
+            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
         });
+
             /**
              * send POST request to start_card.php to call
              * startCard-method. startCard-method will show
@@ -92,6 +111,7 @@
             //     console.log(data);
             // });
     }
+
 
 
     // deal cards to every user

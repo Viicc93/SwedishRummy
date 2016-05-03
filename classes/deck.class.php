@@ -154,8 +154,18 @@ class Deck {
     return $this->_backOfCard = $_backOfCard;
   }
 
+  /**
+   * botPlayCard() is the method that will be called
+   * when Bot turn
+   *
+   */
+  public function botPlayCard($card)
+  {
+    array_push($this->_thrownCards, $card);
+  }
+
 /**
- * @param $id
+ * @param $cardId
  *
  *
  */
@@ -170,7 +180,6 @@ class Deck {
       echo " 8 ";
     }elseif ($foundCard->_value == $latestCard->_value || $foundCard->_suit == $latestCard->_suit) {
       array_push($this->_thrownCards, $foundCard);
-      print_r($this->_thrownCards);
     }
 
   }
@@ -223,10 +232,10 @@ class Deck {
     return $this->_thrownCards;
   }
 
-  public function nextPlayer()
+  public function nextPlayer($index)
   {
     for ($i=0; $i < count($this->_users); $i++) {
-      return $this->_users[$i];
+      return $this->_users[$index];
     }
   }
 }
