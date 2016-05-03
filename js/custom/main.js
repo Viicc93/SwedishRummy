@@ -88,6 +88,7 @@
              * the start card on the table "the first thrown card"
              */
 
+
           /*  var deckUrl = 'api/start_card.php';
             ajax(deckUrl, 'POST', { action: "start" }, function(data) {
                 console.log(data);
@@ -100,6 +101,7 @@
          });
 
         console.log('ölakdjsf');
+
     }
 
 
@@ -122,5 +124,14 @@
             }
         });
     }
+
+    $(document).delegate('.active-user', 'click', function(event) {
+        var $cardId = $(this).attr('data-cardId'),
+            $userId = $(this).parent('.user-cards').attr('data-user-id');
+            var deckUrl = 'api/play_card.php';
+            ajax(deckUrl, 'POST', { userId: $userId, cardId: $cardId }, function(data) {
+                console.log(data);
+            });
+    });
 
 })(jQuery);
