@@ -38,14 +38,15 @@
     };
 
 
-    // get cards on table
-    var cardsOnTableUrl = 'api/cards_on_table.php';
-    $.getJSON(cardsOnTableUrl, function(cards) {
-        for (var i = 0; i < cards.length; i++) {
-            $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img data-cardId="' + cards[i]._cardId + '" class="cards-pos" src="img/back_of_card.png" /></a>');
-            $('.messages').after($cardOnTable);
-        };
-    });
+
+        // get cards on table
+        var cardsOnTableUrl = 'api/cards_on_table.php';
+         $.getJSON(cardsOnTableUrl, function(cards) {
+            for (var i = 0; i < cards.length; i++) {
+                $cardOnTable.append('<a data-cardId="' + cards[i]._cardId + '"><img data-cardId="' + cards[i]._cardId + '" class="cards-pos" src="img/back_of_card.png" /></a>');
+                $('.messages').after($cardOnTable);
+            };
+        });
 
 
 
@@ -74,14 +75,16 @@
         });
     };
 
+
+
     function startCard() {
 
         var thrownCardUrl = 'api/thrown_card.php';
         $.getJSON(thrownCardUrl, function(cards) {
             $cardOnTable.after($thrownCards);
-            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>')
-            console.log(cards);
+            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
         });
+
             /**
              * send POST request to start_card.php to call
              * startCard-method. startCard-method will show
@@ -92,6 +95,7 @@
             //     console.log(data);
             // });
     }
+
 
 
     // deal cards to every user
