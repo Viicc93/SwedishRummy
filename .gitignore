@@ -32,3 +32,6 @@ node_modules
 # Optional REPL history
 .node_repl_history
 json/cards.json
+
+txt/serialize_deck_obj.txt
+

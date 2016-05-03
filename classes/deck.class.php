@@ -195,4 +195,5 @@ class Deck {
       return $this->_users[$i];
     }
   }
+
 }
