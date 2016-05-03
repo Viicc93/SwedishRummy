@@ -154,8 +154,18 @@ class Deck {
     return $this->_backOfCard = $_backOfCard;
   }
 
+  /**
+   * botPlayCard() is the method that will be called
+   * when Bot turn
+   *
+   */
+  public function botPlayCard($card)
+  {
+    array_push($this->_thrownCards, $card);
+  }
+
 /**
- * @param $id
+ * @param $cardId
  *
  *
  */

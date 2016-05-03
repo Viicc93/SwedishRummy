@@ -4,8 +4,12 @@ class Bot extends Player {
 	function __construct(){
 		Parent::__construct("Anna");
 	}
+
+	// return one random card from Bot $_cardOnHand array
 	public function PlayCard(){
-		# code for player to play a card on hand...
+		// get random index
+		$randIndex = rand(0, 7);
+			return array_splice($this->getBotCards(), $randIndex, 1);
 	}
 	public function DrawCard(){
 		# code for player to draw a card when no match on hand....
@@ -16,5 +20,11 @@ class Bot extends Player {
 	public function getBotCards()
 	{
 		return $this->getCardsArray();
+	}
+
+	// return Bot object
+	public function getBotObj()
+	{
+		return $this;
 	}
 }

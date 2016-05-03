@@ -52,9 +52,22 @@
     }
 
 
-    whichPlayer();
 
 
+    // create user container "div" to hold every user cards
+    function usersInit(users) {
+        $body.delegate('.deal-cards', 'click', function(event) {
+
+            for (var i = 0; i < users.length; i++) {
+                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+                $table.find('.game-heading').hide('slow');
+                dealUsersCard(users[i]);
+            };
+            $('button[type="submit"]').prop('disabled', true);
+            startCard();
+            whichPlayer();
+        });
+    };
 
         // get cards on table
         var cardsOnTableUrl = 'api/cards_on_table.php';
@@ -77,20 +90,6 @@
         }
     });
 
-    // create user container "div" to hold every user cards
-    function usersInit(users) {
-        $body.delegate('.deal-cards', 'click', function(event) {
-
-
-            for (var i = 0; i < users.length; i++) {
-                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
-                $table.find('.game-heading').hide('slow');
-                dealUsersCard(users[i]);
-            };
-            $('button[type="submit"]').prop('disabled', true);
-            startCard();
-        });
-    };
 
 
 
