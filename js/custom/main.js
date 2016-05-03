@@ -3,7 +3,8 @@
     // cache dom
     var $body = $(document).find('body'),
         $joinForm = $('form'),
-        $cardOnTable = $('<div class="cards_on_table"/>'),
+        $cardOnTable = $('<div class="cards_on_table table"/>'),
+        $thrownCards = $('<div class="cards_on_table thrown"/>'),
         $table = $body.find('#table');
 
     $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
@@ -64,7 +65,7 @@
 
 
             for (var i = 0; i < users.length; i++) {
-                $('.cards_on_table').after('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
+                $('.cards_on_table').before('<div class="col-md-6 user-cards" data-user-id="' + users[i]._playerId + '"><h4>' + users[i].name + '</h4></div>');
                 $table.find('.game-heading').hide('slow');
                 dealUsersCard(users[i]);
             };
@@ -75,11 +76,18 @@
 
     function startCard() {
 
+        var thrownCardUrl = 'api/thrown_card.php';
+        $.getJSON(thrownCardUrl, function(cards) {
+            $cardOnTable.after($thrownCards);
+            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>')
+            console.log(cards);
+        });
             /**
              * send POST request to start_card.php to call
              * startCard-method. startCard-method will show
              * the start card on the table "the first thrown card"
              */
+
           /*  var deckUrl = 'api/start_card.php';
             ajax(deckUrl, 'POST', { action: "start" }, function(data) {
                 console.log(data);
@@ -90,6 +98,7 @@
              $cardOnTable.after('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
              console.log(cards);
          });
+
         console.log('ölakdjsf');
     }
 

@@ -1,17 +1,18 @@
 <?php
 class User extends Player {
 
-	function __construct($name){
+	function __construct($name) {
+
 		Parent::__construct($name);
 
 	}
-	public function PlayCard(){
+	public function PlayCard() {
 		# code for player to play a card on hand...
 	}
-	public function DrawCard(){
+	public function DrawCard() {
 		# code for player to draw a card when no match on hand....
 	}
-	public function RenderCard(){
+	public function RenderCard() {
 		# code to render cards on hand...
 	}
 }
