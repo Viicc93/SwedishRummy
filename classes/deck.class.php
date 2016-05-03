@@ -170,7 +170,6 @@ class Deck {
       echo " 8 ";
     }elseif ($foundCard[0]->getCardValue() == $latestCard->getCardValue() || $foundCard[0]->getCardSuit() == $latestCard->getCardSuit()) {
       array_push($this->_thrownCards, $foundCard);
-      print_r($this->_thrownCards);
     }
 
   }

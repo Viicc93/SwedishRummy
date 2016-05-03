@@ -1,5 +1,6 @@
 <?php
 class Bot extends Player {
+
 	function __construct(){
 		Parent::__construct("Anna");
 	}
@@ -11,5 +12,9 @@ class Bot extends Player {
 	}
 	public function RenderCard(){
 		# code to render cards on hand...
+	}
+	public function getBotCards()
+	{
+		return $this->getCardsArray();
 	}
 }

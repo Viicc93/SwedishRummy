@@ -37,6 +37,15 @@
         });
     };
 
+    function whichPlayer() {
+        var url = 'json/game_status.json';
+        ajax(url, null, null, function(queue) {
+            console.log(queue.whichPlayer);
+        });
+    }
+
+    whichPlayer();
+
 
 
         // get cards on table

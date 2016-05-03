@@ -16,7 +16,7 @@ try {
     $cardId = $req->getRequest('cardId');
 
     $selz_deck->playCard($cardId, Session::getSession('user-id'));
-    //file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($selz_deck));
+    file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($selz_deck));
 
   }else{
     echo "Nothing";
