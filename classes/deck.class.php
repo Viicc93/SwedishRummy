@@ -222,10 +222,10 @@ class Deck {
     return $this->_thrownCards;
   }
 
-  public function nextPlayer()
+  public function nextPlayer($index)
   {
     for ($i=0; $i < count($this->_users); $i++) {
-      return $this->_users[$i];
+      return $this->_users[$index];
     }
   }
 }

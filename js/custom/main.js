@@ -40,9 +40,17 @@
     function whichPlayer() {
         var url = 'json/game_status.json';
         ajax(url, null, null, function(queue) {
-            console.log(queue.whichPlayer);
+            thisPlayer(queue.whichPlayer);
         });
     }
+
+    function thisPlayer(index) {
+       var url = 'api/game_queue.php';
+       ajax(url, 'POST', { indx: index }, function(data) {
+        console.log(data);
+       });
+    }
+
 
     whichPlayer();
 
