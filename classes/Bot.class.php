@@ -11,10 +11,10 @@ class Bot extends Player {
 		$randIndex = rand(0, 7);
 			return array_splice($this->getBotCards(), $randIndex, 1);
 	}
-	public function DrawCard() {
+	public function DrawCard(){
 		# code for player to draw a card when no match on hand....
 	}
-	public function RenderCard() {
+	public function RenderCard(){
 		# code to render cards on hand...
 	}
 	public function getBotCards()

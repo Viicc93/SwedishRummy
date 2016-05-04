@@ -9,7 +9,7 @@
 
     $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
 
-    // console.log(player_id);
+    console.log(player_id);
 
 
     /*
