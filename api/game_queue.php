@@ -34,19 +34,18 @@ try {
       // get users form Deck-object
       $users = $selz_deck->getUser();
       // loop through users
-      for ($i=0; $i < count($users); $i++) {
-        $bot_obj = $users[$i]->getBotObj();
-
+      //for ($i=0; $i < count($users); $i++) {
+        $bot_obj = $users[0]->getBotObj();
         $card = $bot_obj->PlayCard();
         $selz_deck->botPlayCard($card);
         file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($selz_deck));
         //print_r($bot_obj);
         //$selz_deck->botPlayCard($theCard);
-   $ser = file_get_contents(Session::getSession('path_to_serialize_tx'));
-    $ob = unserialize($ser);
-    print_r($ob->getThrownCard());
-      }
-    }else{
+        $ser = file_get_contents(Session::getSession('path_to_serialize_tx'));
+        $ob = unserialize($ser);
+        print_r($ob->getThrownCard());
+      //}
+    } else {
 
       print_r($selz_deck->nextPlayer($index));
     }

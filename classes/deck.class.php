@@ -214,7 +214,7 @@ class Deck {
   {
     for ($i=0; $i < count($this->_cards); $i++)
     {
-      array_push($this->_cardsOnTable, $this->_cards[$i]);
+      array_push($this->_cards, $this->_cards[$i]);
     }
     shuffle($this->_cards);
     return $this->_cards;
