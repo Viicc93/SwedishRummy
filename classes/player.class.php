@@ -8,17 +8,18 @@ class Player {
 	public $playCard;
 	public $cardDraw;
 
+
 	function __construct($name) {
 		$this->_cardsOnHand = [];
-		$this->_playerId    = uniqid();
+		$this->_playerId = uniqid();
 		//$this->_playerId = $this->_id;
-		//	global $GameFunction;
+	//	global $GameFunction;
 		// Säger till Player klassen att använda $GameFunction som skapades utanför klassen.
 		// $GameFunction skapades i turn.class.php
-		$this->name = $name;
-		//	$GameFunction->addPlayer($name);
+	$this->name = $name;
+	//	$GameFunction->addPlayer($name);
 		// Lägger till Spelaren i GameFunction klassens array som håller reda på alla spelare.
-		//	$this->id = $GameFunction->players();
+	//	$this->id = $GameFunction->players();
 		// Ger spelare id beroende på array längend i GameFunction klassen.
 	}
 	// public function dealCard($cardObj) {
@@ -28,24 +29,26 @@ class Player {
 	// }
 	public function cardCount() {
 		foreach ($this->_cardsOnHand as $cardOnHand) {
-			print_r($_cardOnHand)."\n";
+			print_r($_cardOnHand) . "\n";
 		}
 	}
-	public function getUserId() {
+	public function getUserId()
+	{
 		return $this->_playerId;
-
 	}
-	public function getCardsArray() {
+	public function getCardsArray()
+	{
 		return $this->_cardsOnHand;
 	}
-
-	public function getCardId() {
+	public function getCardId()
+	{
 		// for ($i=0; $i < count($this->_cardsOnHand); $i++) {
 		// 	return $this->_cardsOnHand[$i]->getCardId();
 		// }
 	}
 
-	public function getPlayerName() {
+	public function getPlayerName()
+	{
 		return $this->name;
 	}
 }

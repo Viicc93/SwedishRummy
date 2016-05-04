@@ -12,11 +12,18 @@ try {
       define('PATH_TO_SERIALIZE_OBJ_FILE', __DIR__ . '/txt/serialize_deck_obj.txt');
       // create session to hold the constant-url PATH_TO_SERIALIZE_OBJ_FILE
       Session::setSession('path_to_serialize_tx', PATH_TO_SERIALIZE_OBJ_FILE);
+
+
       ini_set('display_startup_errors',1);
       ini_set('display_errors',1);
       error_reporting(-1);
+
       $json_file = 'json/cards.json';
-      define('PATH_TO_CARDS_JSON_FILE', 'json/cards.json');
+      define('PATH_TO_CARDS_JSON_FILE', __DIR__ . '/json/game_status.json');
+
+      // create session to hold the constant-url PATH_TO_SERIALIZE_OBJ_FILE
+      Session::setSession('path_to_json_file', PATH_TO_CARDS_JSON_FILE);
+
       // scan cards dir to get cards url
       $cardsArr = scandir(__DIR__ . '/cards');
   if (!file_exists(Session::getSession('path_to_serialize_tx')) ||
@@ -51,6 +58,8 @@ try {
         $ob = file_get_contents(PATH_TO_SERIALIZE_OBJ_FILE);
         $selz_deck = unserialize($ob);
         print_r($selz_deck->getThrownCard());
+
+require_once 'inc/game_status.php';
 
 
         //$selz_deck->moveThrownCards(17, Session::getSession('user-id'));
