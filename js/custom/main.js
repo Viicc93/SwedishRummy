@@ -18,13 +18,14 @@
      * to use HTTP methods for RESTfull services like
      * POST, GET, PUT, PATCH and DELETE
      */
-    function ajax(url, type, data, callBack) {
+    function ajax(url, type, dataType, data, callBack) {
         // define the default HTTP method
         type = type || 'GET';
         // assign jQuery ajax method to res variable
         var res = $.ajax({
             url: url,
             type: type,
+            dataType: dataType || 'JSON',
             data: data
         });
         // if the request success will call the callback function
@@ -37,19 +38,23 @@
         });
     };
 
-    function whichPlayer() {
-        var url = 'json/game_status.json';
-        ajax(url, null, null, function(queue) {
-            thisPlayer(queue.whichPlayer);
-        });
-    }
+    // function whichPlayer() {
+    //     var url = 'json/game_queue.json';
+    //     ajax(url, null, null, function(queue) {
+    //         //thisPlayer(queue.whichPlayer);
+    //         console.log(queue);
+    //     });
+    // }
 
-    function thisPlayer(index) {
-       var url = 'api/game_queue.php';
-       ajax(url, 'POST', { indx: index }, function(data) {
-        console.log(data);
-       });
-    }
+    // whichPlayer();
+
+    // function thisPlayer(index) {
+    //    var url = 'api/game_queue.php';
+    //    ajax(url, 'POST', { indx: index }, function(data) {
+    //     console.log(data);
+    //    });
+    // }
+
 
 
 
@@ -64,10 +69,23 @@
                 dealUsersCard(users[i]);
             };
             $('button[type="submit"]').prop('disabled', true);
-            startCard();
-            whichPlayer();
+            //startCard();
+            setInval();
         });
     };
+
+    function userTurn() {
+        var url = 'api/state.php';
+        ajax(url, null, null, null, function(state) {
+            renderThrownCards(state.thrownCardArray);
+            console.log(state.thrownCardArray);
+        });
+    }
+function setInval() {
+    setInterval(function() {
+        userTurn();
+    }, 1000);
+}
 
         // get cards on table
         var cardsOnTableUrl = 'api/cards_on_table.php';
@@ -91,15 +109,24 @@
     });
 
 
+    function renderThrownCards(thrownCards) {
 
-
-    function startCard() {
-
-        var thrownCardUrl = 'api/thrown_card.php';
-        $.getJSON(thrownCardUrl, function(cards) {
+        // var thrownCardUrl = 'api/thrown_card.php';
+        // $.getJSON(thrownCardUrl, function(cards) {
             $cardOnTable.after($thrownCards);
-            $thrownCards.append('<a data-cardId="' + cards[0]._cardId + '"><img data-cardId="' + cards[0]._cardId + '" class="cards-pos" src="' + cards[0]._href + '" /></a>');
-        });
+
+            var $html = '';
+
+            for (var i = 0; i < thrownCards.length; i++) {
+
+                    $html += '<img data-cardId="' +  thrownCards[i]._cardId + '" class="cards-pos" src="' +  thrownCards[i]._href + '" />';
+
+
+            //$thrownCards.append('<a data-cardId="' + thrownCards[i]._cardId + '"><img data-cardId="' +  thrownCards[i]._cardId + '" class="cards-pos" src="' +  thrownCards[i]._href + '" /></a>');
+            };
+            $thrownCards.html($html);
+
+        // });
 
             /**
              * send POST request to start_card.php to call
@@ -111,6 +138,7 @@
             //     console.log(data);
             // });
     }
+
 
 
 
@@ -138,7 +166,7 @@
         var $cardId = $(this).attr('data-cardId'),
             $userId = $(this).parent('.user-cards').attr('data-user-id');
             var deckUrl = 'api/play_card.php';
-            ajax(deckUrl, 'POST', { userId: $userId, cardId: $cardId }, function(data) {
+            ajax(deckUrl, 'POST', null, { userId: $userId, cardId: $cardId }, function(data) {
                 console.log(data);
             });
     });
