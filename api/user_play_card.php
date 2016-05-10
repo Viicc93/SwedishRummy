@@ -14,13 +14,14 @@ try {
     if ($req->resExists() && $req->getRequest('userid') == Session::getSession('user-id')) {
         $cardId = $req->getRequest('cardid');
         $playerTurn = $req->getRequest('playerTurn');
+        $userId =  Session::getSession('user-id');
         //$playerTurn = $req->getRequest('playerTurn');
         //echo json_encode('php-card-id ' . $cardId . ' ' . 'php-player-turn'.  $playerTurn);
 
         // $selz_deck->playCard($cardId, $playerTurn);
 
         // file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($selz_deck));
-        echo json_encode($selz_deck->playCard($cardId, $playerTurn));
+        echo json_encode($selz_deck->playCard($cardId, $playerTurn, $userId));
         $selz_deck->nextPlayer();
 
     //echo json_encode($selz_deck->playCard($cardId, $playerTurn));

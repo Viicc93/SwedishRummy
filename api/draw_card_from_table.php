@@ -9,9 +9,12 @@ try {
     $ob = file_get_contents(Session::getSession('path_to_serialize_tx'));
   // unserialize deck
     $selz_deck = unserialize($ob);
-    header('Content-Type: application/json');
-    echo json_encode($selz_deck);
-    echo json_encode($selz_deck->checkAvailabeCard());
+    if ($selz_deck->isEight()) {
+
+      $selz_deck->getDrawCard();
+    }
+    //file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($selz_deck));
+
 } catch (Exception $e) {
     echo $e->getMessage();
 }

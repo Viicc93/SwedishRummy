@@ -85,6 +85,9 @@
 
             userPlayCard(deck._users);
 
+            /* Get value that returned from getDrawCard-method in Deck.class.php */
+            //getDrawCard(deck.drawCard);
+
 
 
             // userWrapperDiv(deck._users);

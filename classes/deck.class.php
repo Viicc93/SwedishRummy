@@ -20,6 +20,16 @@ class Deck
     public $availableCards;
 
 
+    /**
+     * $drawCard will be activated when user
+     * has no card on his hand that fit the
+     * last thrown card.
+     *
+     * @var boolean
+     */
+    public $drawCard;
+
+
 
   /**
    * The constructor define $_cards array,
@@ -42,13 +52,16 @@ class Deck
         $this->availableCards = [];
 
         // Define is eight property
-        $this->isEight = null;
+        $this->isEight = false;
 
         // Define player turn property
         $this->playerTurn = 0;
 
         // Add Bot player
         $this->addBotPlayer();
+
+        // Define $drawCard
+        $this->drawCard = false;
 
     }
 
@@ -260,43 +273,88 @@ class Deck
  *
  */
 
-    public function playCard($cardId, $playerIndex)
+    public function playCard($cardId, $playerIndex, $userId)
     {
       $playerHand = $this->_users[$playerIndex]->_cardsOnHand;
       $latestCard = end($this->_thrownCards);
-      foreach ($playerHand as $i => $card) {
-          if ($card->getCardId() == $cardId) {
-          $playedCard = array_splice($this->_users[$playerIndex]->_cardsOnHand, $i, 1)[0];
-            if ($playedCard->getCardValue == 8) {
-              $this->isEight = true;
-              array_push($this->_thrownCards, $playedCard);
-            }elseif ($playedCard->getCardValue() == $latestCard->getCardValue() ||
-                      $playedCard->getCardSuit() == $latestCard->getCardSuit()) {
-              array_push($this->_thrownCards, $playedCard);
-          return 'Player hand' . $playerHand;
-            }else{
-              $this->drawCard($playerIndex);
-            }
+
+      if ($this->_users[$playerIndex]->getUserId() == $userId) {
+
+
+        foreach ($playerHand as $i => $card) {
+            if ($card->getCardId() == $cardId) {
+            $playedCard = array_splice($this->_users[$playerIndex]->_cardsOnHand, $i, 1)[0];
+
+              if ($playedCard->getCardValue == 8) {
+                $this->isEight = true;
+                array_push($this->_thrownCards,  array_splice($this->_users[$playerIndex]->_cardsOnHand, $i, 1)[0]);
+              }elseif ($playedCard->getCardValue() == $latestCard->getCardValue() ||
+                        $playedCard->getCardSuit() == $latestCard->getCardSuit()) {
+
+                array_push($this->_thrownCards,  array_splice($this->_users[$playerIndex]->_cardsOnHand, $i, 1)[0]);
+
+                return 'Player hand' . $playerHand;
+              }
+          }
         }
+
       }
       //return $this->_users[$playerIndex]->_cardsOnHand;
 
     }
 
+    public function checkAvailabeCard()
+    {
+      // Get card on hand for the user that has the turn
+      $userHand = $this->_users[$this->playerTurn]->getCardsArray();
 
+      // Get thrownCards array
+      $thrownCards = $this->getThrownCard();
+
+      // Check if the two array will be intersected
+      $results = array_intersect($userHand, $thrownCards);
+
+      // Check if there is no intersect
+      if (count($results) === 0) {
+
+        // Set drawCard to true
+        $this->drawCard = true;
+      }
+    }
+
+
+/**
+ * Draw card from table
+ *
+ *
+ */
 
 public function drawCard($index){
+    // Get the latest card in _cards array
     $drawnCard = array_pop($this->_cards);
+
+    // Get latest card in _thrownCards array
     $latestCard = end($this->_thrownCards);
+
+    // Check if the card that came from table is 8
     if ($drawnCard->getCardValue() == 8) {
+
+      // Assign true to isEight property
       $this->isEight = true;
-      array_push($this->_thrownCards, $this->_card);
+
+      // Push the card that came from _cards array in _thrownCards array
+      array_push($this->_thrownCards, array_pop($this->_cards));
     }
+    // Validate the card that came from _cards array with the latest card in _thrownCards array
     elseif ($drawnCard->getCardValue() == $latestCard->getCardValue() || $drawnCard->getCardSuit() == $latestCard->getCardSuit()) {
-       array_push($this->_thrownCards, $this->_card);
+
+      // Push the card efter the validateion in _thrownCards array
+       array_push($this->_thrownCards, array_pop($this->_cards));
     }
     else {
-      array_push($this->_users[$index]->_cardsOnHand, $this->_card);
+      // If the card that has drwan from the table doesn't fit with the latest card in _thrownCards array
+      // so the card will be pushed in user hand
+      array_push($this->_users[$index]->_cardsOnHand, array_pop($this->_cards));
     }
   }
 
@@ -382,4 +440,15 @@ public function drawCard($index){
     {
         return $this->isEight;
     }
+
+    /**
+     * Get $drawCard
+     *
+     *
+     */
+    // public function getDrawCard()
+    // {
+    //   return $this->drawCard;
+    // }
+
 }
