@@ -1,77 +1,66 @@
-
 <?php
-try {
-  // drfine json file url
-  //$json_file = 'json/cards.json';
-  //define(PATH_TO_CARDS_JSON_FILE, 'json/cards.json');
-  // create an empty array to hold cards url:s
-  $cardsMemory = [];
-  $cardsObjMemory = [];
 
-  $deck = new Deck();
+    require_once '../config/config.php';
+    Session::startSession();
 
+  if (filter_has_var(INPUT_POST, 'submit'))
+  { // if button submit is clicked
+    try {
 
-  $countCardsLength = 0;
-  $cardId = 0;
-  // check if cards.json exists
-  //if (!file_exists(PATH_TO_CARDS_JSON_FILE, 'w+')) {
-    // create cards.json file
-    //$fp = fopen(PATH_TO_CARDS_JSON_FILE, 'w+');
-    //fclose($fp);
-    // scan cards dir to get cards url
-    $cardsArr = scandir('cards');
-    // loop through cards url array
-    foreach ($cardsArr as $item) {
-    $countCardsLength++;
-    // ignore mac's hidden files that start with "."
-    if ($item == '..' || $item == '.' || $item == '.DS_Store') continue;
-    // manipulate cards_url array
-    array_push($cardsMemory, $item);
-    //$card_expl = explode(array('.', '_'), $item);
-    $split_img_url = preg_split('/[-_.]+/', $item);
-    $img_url = 'cards/' . $item;
-    $card_obj = $deck->setCards(new Card($cardId++, $split_img_url[0], $split_img_url[2], $img_url));
-    //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($card_obj, JSON_FORCE_OBJECT));
+         // require fields
+         $required = ['user'];
+         // instantiate Validator class
+         $val = new Validator($required);
+         // filter user input
+         $val->removeTags('user');
+         // get filtered value
+         $filtered   = $val->validateInput();
+         // get missing fields
+         $missing  = $val->getMissing();
+         // catch errors
+         $errors   = $val->getErrors();
+         /*
+         * check that there is no missing field or errors
+         * that returned from Validator-class
+         */
+         if (!$missing && !$errors)
+         {
 
-    // echo "<pre>";
-    // print_r($split_img_url);
-
-    // prevent duplicated items in cards array
-    // if (count($cardsArr) === $countCardsLength) {
-    // // save results to cards.json
-    // //file_put_contents(PATH_TO_CARDS_JSON_FILE, json_encode($card, JSON_FORCE_OBJECT));
-    // }
-  }
-//};
-//$deck->getCards();
-// echo '<pre>';
-
-// print_r($deck->getCards());
+          // get filtered username returned from Validator-class
+          $username = $filtered['user'];
+          $user = new User($username); // create user player
 
 
+            // set user id to session
+            Session::setSession('user-id', $user->getUserId());
 
-  if (isset($_POST['submit'])){ // if button submit is clicked
-    $userName = $_POST['user']; // get name of user player
 
-    $user = new User($userName); // create user player
-    $bot = new Bot(); // create bot player
-    $deck->addPlayers($user, $bot); // add players to Deck class
+          $deck_ob = file_get_contents(Session::getSession('path_to_serialize_tx'));
+          $unSrlz_deck = unserialize($deck_ob);
 
-    for ($i=0; $i < 8; $i++) { // for loop to deal cards to user player cardsOnHand array
-      $card_obj = $deck->getCards(); // get card array
-			$userCardIndex = mt_rand(0, count($card_obj)); // count array and get a random index for card
-			$botCardIndex = mt_rand(0, count($card_obj));
+          $unSrlz_deck->addPlayers($user); // add players to Deck class
+          $unSrlz_deck->startCard();
 
-      if ($userCardIndex != $botCardIndex) {
+          file_put_contents(Session::getSession('path_to_serialize_tx'), serialize($unSrlz_deck));
 
-            $user->dealCard($card_obj[$userCardIndex]); // send card to dealCard() and push to cardsOnHand array
-            $deck->moveCardFromDeck($userCardIndex); // remove dealed card from deck
-
-            $bot->dealCard($card_obj[$botCardIndex]);
-            $deck->moveCardFromDeck($bodCardIndex);
+          if (count($unSrlz_deck->getUser()) === 4)
+          {
+            Session::flashSession('errorMessage', 'This game is full!');
+          }
       }
+
+      /*
+      * If user tries to join without username,
+      * will get a flash message tells that
+      * the username is required.
+      */
+      if ($missing) {
+        // Sets sessions to show the missing fields
+        Session::flashSession('missing',$missing);
+      }
+      Redirect::toPage('../index.php');
+
+    } catch (Exception $e) {
+      echo $e->getMessage();
     }
-	}
-} catch (Exception $e) {
-	echo $e;
-}
+  }
