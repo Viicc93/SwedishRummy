@@ -108,7 +108,7 @@
     function renderPlayersHand(users) {
         for (var i = 0; i < users.length; i++) {
             var cardsOnHand = users[i]._cardsOnHand;
-            if ($('.users-hand .user-cards').length < 2) {
+            if ($('.users-hand .user-cards').length < users.length) {
 
                 $userHands.append('<div class="col-md-6 user-cards" data-user-pos="' + i + '" data-user-id="' + users[i]._playerId + '"></div>');
             }
@@ -260,11 +260,11 @@
 
             var deckUrl = 'api/user_play_card.php';
             ajax(deckUrl, 'POST', null, { userid: $userId, cardid: $cardId, playerTurn: $playerTurn }, function(data) {
-                console.log('thrownCards', data);
+                //console.log('thrownCards', data);
             });
 
 
-            //renderPlayersHand(users);
+            renderPlayersHand(users);
         });
     }
 

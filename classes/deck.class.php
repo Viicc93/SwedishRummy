@@ -265,23 +265,40 @@ class Deck
       $playerHand = $this->_users[$playerIndex]->_cardsOnHand;
       $latestCard = end($this->_thrownCards);
       foreach ($playerHand as $i => $card) {
-        if ($card->getCardId() == $cardId) {
-        $playedCard = array_splice($playerHand, $i, 1)[0];
-          if ($playedCard->getCardValue == 8) {
-            $this->isEight = true;
-            array_push($this->_thrownCards, $playedCard);
-          }elseif ($playedCard->getCardValue() == $latestCard->getCardValue() ||
-                    $playedCard->getCardSuit() == $latestCard->getCardSuit()) {
-            array_push($this->_thrownCards, $playedCard);
-          }else{
-            return 'Draw card';
-          }
-        return $playedCard;
-      }
+          if ($card->getCardId() == $cardId) {
+          $playedCard = array_splice($this->_users[$playerIndex]->_cardsOnHand, $i, 1)[0];
+            if ($playedCard->getCardValue == 8) {
+              $this->isEight = true;
+              array_push($this->_thrownCards, $playedCard);
+            }elseif ($playedCard->getCardValue() == $latestCard->getCardValue() ||
+                      $playedCard->getCardSuit() == $latestCard->getCardSuit()) {
+              array_push($this->_thrownCards, $playedCard);
+          return 'Player hand' . $playerHand;
+            }else{
+              $this->drawCard($playerIndex);
+            }
+        }
       }
       //return $this->_users[$playerIndex]->_cardsOnHand;
 
     }
+
+
+
+public function drawCard($index){
+    $drawnCard = array_pop($this->_cards);
+    $latestCard = end($this->_thrownCards);
+    if ($drawnCard->getCardValue() == 8) {
+      $this->isEight = true;
+      array_push($this->_thrownCards, $this->_card);
+    }
+    elseif ($drawnCard->getCardValue() == $latestCard->getCardValue() || $drawnCard->getCardSuit() == $latestCard->getCardSuit()) {
+       array_push($this->_thrownCards, $this->_card);
+    }
+    else {
+      array_push($this->_users[$index]->_cardsOnHand, $this->_card);
+    }
+  }
 
 
     // public function findCard($cardId, $userIndex)
