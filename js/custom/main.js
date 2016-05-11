@@ -7,7 +7,8 @@
         $thrownCards = $('<div class="cards_on_table thrown"/>'),
         $userHands = $('<div class="users-hand"/>'),
         $table = $body.find('#table'),
-        $message = $table.find('.messages');
+        $message = $table.find('.messages'),
+        $suit = '<div class="suit"/>';
 
     $table.prepend('<h1 class="game-heading">SWEDISH RUMMEY</h1>');
     $joinForm.after($dealButton);
@@ -85,9 +86,6 @@
 
             userPlayCard(deck._users);
 
-            /* Get value that returned from getDrawCard-method in Deck.class.php */
-            //getDrawCard(deck.drawCard);
-
 
 
             // userWrapperDiv(deck._users);
@@ -137,13 +135,15 @@
         $userHolder.each(function(el) {
             // // check user id
             if ($(this).attr('data-user-id') == users._playerId) {
+                $userHolder.prepend($suit);
                 for (var i  in cardsOnHand) {
                     // if the user id in data-user-id the same user-id that came from the session to show picture side of the card, otherwise the backside will be shown
                     users._playerId === player_id ? $html += ('<a style="pointer-events: none;" data-cardid="' + cardsOnHand[i]._cardId + '">' +
                         '<img data-cardid="' + cardsOnHand[i]._cardId + '" src="' + cardsOnHand[i]._href + '" /></a>') : $html += ('<a style="pointer-events: none;" data-cardid="' + cardsOnHand[i]._cardId + '">' +
-                        '<img data-cardid="' + cardsOnHand[i]._cardId + '"  src="img/back_of_card.png" /></a>');
+                        '<img data-cardid="' + cardsOnHand[i]._cardId + '" src="' + cardsOnHand[i]._href + '"  /></a>');
                     $(this).html(['<h4>' + users.name + '</h4>', $html]);
                 }
+                //src="img/back_of_card.png"
             }
         });
     }
@@ -160,6 +160,10 @@
 
         // appen the icon to the user who has the turn
         $('.user-cards[data-user-pos="' + whosTurn + '"] h4').append('<span class="glyphicon glyphicon-ok-sign"/>');
+
+        // Create data-player-turn attribute to help us to add
+        // the 4 symbols if the user has thrown 8
+        $('.suit').attr('data-player-turn', whosTurn);
 
         /* Create clickable links to the user who has the turn */
         clickableLinks(whosTurn);
@@ -263,7 +267,7 @@
 
             var deckUrl = 'api/user_play_card.php';
             ajax(deckUrl, 'POST', null, { userid: $userId, cardid: $cardId, playerTurn: $playerTurn }, function(data) {
-                //console.log('thrownCards', data);
+            console.log('player turn', data);
             });
 
 
@@ -298,6 +302,10 @@
                 thrownCardOnTable(deck._thrownCards);
             }else{
                 console.log('It is 8');
+
+                $suit = '<div class="chose-suit"><a class="click-suit"><img id="heart" src="img/heart.png"/></a><a class="click-suit"><img id="spades" src="img/spades.png"/></a><a class="click-suit"><img id="diamonds" src="img/diamonds.png"/><a/><a class="click-suit"><img id="clubs" src="img/clubs.png"/></a></div>';
+                    $userHands.find('.suit').prepend($suit);
+                    $('.chose-suit').siblings('a').removeClass('active-user');
             }
             // Update player turn icon
             getTurnIcon(deck.playerTurn);
@@ -307,7 +315,7 @@
 
             // Update player turn icon
             getTurnIcon(deck.playerTurn);
-            console.log(deck);
+            console.log(deck.availableCards);
         });
 
         }, 3000);

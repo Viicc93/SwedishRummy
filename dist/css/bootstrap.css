@@ -6883,6 +6883,16 @@ header .deal-cards {
   cursor: pointer;
   overflow: auto;
 }
+#wrap .chose-suit a {
+  padding: .5rem;
+  overflow: auto;
+}
+#wrap .chose-suit a img {
+  width: 10%;
+  height: auto;
+  margin-right: .1rem;
+  cursor: pointer;
+}
 .cards-on-table-users {
   position: relative;
   margin: 0 auto;

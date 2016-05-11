@@ -143,6 +143,10 @@ module.exports = function (grunt) {
       docsJs: {
         src: configBridge.paths.docsJs,
         dest: 'docs/assets/js/docs.min.js'
+      },
+      mainJs: {
+        src: 'js/custom/**/*.js',
+        dest: 'js/custom/main.min.js'
       }
     },
 
@@ -371,7 +375,7 @@ module.exports = function (grunt) {
         tasks: 'less'
       }
     },
-
+//uglify
     sed: {
       versionNumber: {
         pattern: (function () {

@@ -11,7 +11,6 @@ try {
     $selz_deck = unserialize($ob);
     header('Content-Type: application/json');
     echo json_encode($selz_deck);
-    echo json_encode($selz_deck->checkAvailabeCard());
 } catch (Exception $e) {
     echo $e->getMessage();
 }
